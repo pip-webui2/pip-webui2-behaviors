@@ -12,7 +12,7 @@ class KEY_CODE {
 @Component({
     selector: 'pip-selected',
     template: '<ng-content></ng-content>',
-    //styleUrls: ['./selected.component.scss']
+    styleUrls: ['./selected.component.scss']
 })
 export class PipSelectedComponent implements OnInit, AfterViewInit {
     private _index: number = 0;
@@ -128,12 +128,30 @@ export class PipSelectedComponent implements OnInit, AfterViewInit {
             containerScrollTop = this.elRef.nativeElement.scrollTop;
 
         //this.isScrolled = true;
+        // console.log('containerScrollTop', containerScrollTop);
+        // console.log('itemTop', itemTop);
+        // console.log('containerTop', containerTop);
+        // console.log('containerBottom', containerBottom);
+        // console.log('itemBottom', itemBottom);
 
-        if (containerTop > itemTop) {
-            this.elRef.nativeElement.scrollTop = containerScrollTop + itemTop - containerTop;
-        } else if (containerBottom < itemBottom) {
-            this.elRef.nativeElement.scrollTop = containerScrollTop + itemBottom - containerBottom;
-        }
+        // if (containerTop > itemTop) {
+        //     console.log('first');
+        //     this.elRef.nativeElement.scrollTop = containerScrollTop + itemTop - containerTop;
+        // } else if (containerBottom < itemBottom) {
+        //     this.elRef.nativeElement.scrollTop = containerScrollTop + itemBottom - containerBottom;
+        // } else {
+        //     this.elRef.nativeElement.scrollTop = itemTop - containerTop;
+        // }
+
+        //this.elRef.nativeElement.scrollTop = itemTop - containerTop;
+        // if (itemBottom > containerBottom + containerScrollTop) {
+        //     console.log('first');
+        //     this.elRef.nativeElement.scrollTop = containerScrollTop + itemTop - containerTop;
+        // } else if (containerBottom > itemBottom) {
+        //     this.elRef.nativeElement.scrollTop = itemTop - containerTop;
+        // }
+
+        this.elRef.nativeElement.scrollTop = itemTop - containerTop;
     }
 
     public onClickEvent = (element) => {
