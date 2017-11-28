@@ -1,0 +1,11 @@
+<p>Selected</p>
+
+<pip-selected (onSelect)="onSelect($event)">
+    <mat-nav-list>
+        <mat-divider></mat-divider>
+        <mat-list-item *ngFor="let item of items" pipSelectable (keypress)="keypress()">
+            {{ item.title }}
+        </mat-list-item>
+        <mat-divider></mat-divider>
+    </mat-nav-list>
+</pip-selected>
