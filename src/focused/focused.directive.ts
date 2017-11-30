@@ -76,9 +76,9 @@ export class PipFocusedDirective implements AfterViewInit {
                     this.color = element.style.backgroundColor || 'rgba(0, 0, 0, 0)';
                     this.oldBackgroundColor = this.color;
                     element.style.cssText = 'background-color:' + this.rgba(this.color);
-                    if (this._focusedClass) element.classList.add(this.focusedClass);
+                    if (this._focusedClass) element.classList.add(this._focusedClass);
                 } else {
-                    if (this._focusedClass) element.classList.add(this.focusedClass);
+                    if (this._focusedClass) element.classList.add(this._focusedClass);
                     if (this.focusedOpacityClass) element.classList.add(this.focusedOpacityClass);
                 }
             })
@@ -92,9 +92,9 @@ export class PipFocusedDirective implements AfterViewInit {
                 if (this.onFocusClass) element.classList.remove(this.onFocusClass);
                 if (!this._focusedOpacity) {
                     element.style.cssText = 'background-color:' + this.oldBackgroundColor;
-                    if (this._focusedClass) element.classList.remove(this.focusedClass);
+                    if (this._focusedClass) element.classList.remove(this._focusedClass);
                 } else {
-                    if (this._focusedClass) element.classList.remove(this.focusedClass);
+                    if (this._focusedClass) element.classList.remove(this._focusedClass);
                     if (this.focusedOpacityClass) element.classList.remove(this.focusedOpacityClass);
                 }
             })
@@ -159,7 +159,8 @@ export class PipFocusedDirective implements AfterViewInit {
 
             const
                 increment = (keyCode == KEY_CODE.RIGHT_ARROW || keyCode == KEY_CODE.DOWN_ARROW) ? 1 : -1,
-                moveToControl = this.getElementIndex(this.controls);//this.controls.index(this.controls.filter(".md-focused")) + increment;
+                moveToControl = this.getElementIndex(this.controls) + increment;
+                console.log('moveToControl', moveToControl);
             // Move focus to next control
             if (moveToControl >= 0 && moveToControl < this.controlsLength) {
                 this.controls[moveToControl].focus();
@@ -168,12 +169,11 @@ export class PipFocusedDirective implements AfterViewInit {
     }
 
     private getElementIndex(elements) {
-        let index = -1;
-
+        console.log('this._focusedClass', this._focusedClass);
         for (let i = 0; i < elements.length; i++) {
-            //if ()
+            if (elements[i].classList.contains(this._focusedClass)) return i;
         }
 
-        return 0;
+        return -1;
     }
 }

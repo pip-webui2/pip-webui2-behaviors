@@ -1,0 +1,9 @@
+<mat-card class="app-infinite-scroll pip-scroll" style="margin-left: 0px;">
+    <div class="item-container" pipInfiniteScroll (onInfiniteScroll)="generateItems(10)" 
+        scrollContainer="'.app-infinite-scroll'" scrollListenForEvent="windowResized" scrollParent="true"
+       scrollDistance="0.1">
+        <div class="item" *ngFor="let item of items"  [ngClass]="'bg-' + item.color">
+            {{ item.name }}
+        </div>
+    </div>
+</mat-card>

@@ -36,7 +36,9 @@ export class PipDropDirective implements OnInit, AfterViewInit, OnDestroy {
 
     ngOnInit() { }
 
-    ngAfterViewInit() { }
+    ngAfterViewInit() {
+        this.toggleListeners(true);
+     }
 
     ngOnDestroy() {
         this.onDestroy();
@@ -46,7 +48,7 @@ export class PipDropDirective implements OnInit, AfterViewInit, OnDestroy {
         // remove listeners
         if (!enable) return;
         // add listeners.
-        this.renderer.listen('', 'draggable:start', (evt, obj) => {
+        this.draggableService.on('draggable:start', (evt, obj) => {
             this.onDragStart(evt, obj);
         });
         this.draggableService.on('draggable:move', (evt, obj) => {
@@ -72,8 +74,8 @@ export class PipDropDirective implements OnInit, AfterViewInit, OnDestroy {
         if (this.dragStart) {
             setTimeout(() => {
                 this.dragStart.emit({
-                    $data: obj.data,
-                    $event: obj
+                    data: obj.data,
+                    event: obj
                 });
             }, 0);
         }
@@ -86,8 +88,8 @@ export class PipDropDirective implements OnInit, AfterViewInit, OnDestroy {
         if (this.dragMove) {
             setTimeout(() => {
                 this.dragMove.emit({
-                    $data: obj.data,
-                    $event: obj
+                    data: obj.data,
+                    event: obj
                 });
             }, 0);
         }
@@ -110,8 +112,8 @@ export class PipDropDirective implements OnInit, AfterViewInit, OnDestroy {
             if (this.dropSuccess) {
                 setTimeout(() => {
                     this.dropSuccess.emit({
-                        $data: obj.data,
-                        $event: obj
+                        data: obj.data,
+                        event: obj
                         //$target: this.$scope.$eval(this.$scope.value)
                     });
                 }, 0);
@@ -120,8 +122,8 @@ export class PipDropDirective implements OnInit, AfterViewInit, OnDestroy {
             if (this.diactive) {
                 setTimeout(() => {
                     this.diactive.emit({
-                        $data: obj.data,
-                        $event: obj,
+                        data: obj.data,
+                        event: obj,
                         //$target: this.$scope.$eval(this.$scope.value)
                     });
                 }, 0);
@@ -131,8 +133,8 @@ export class PipDropDirective implements OnInit, AfterViewInit, OnDestroy {
         if (this.dragStop) {
             setTimeout(() => {
                 this.dragStop.emit({
-                    $data: obj.data,
-                    $event: obj
+                    data: obj.data,
+                    event: obj
                 });
             }, 0);
         }
@@ -145,14 +147,14 @@ export class PipDropDirective implements OnInit, AfterViewInit, OnDestroy {
         if (touching !== this._isTouching) {
             if (touching) {
                 this.enter.emit({
-                    $data: obj.data,
-                    $event: obj
+                    data: obj.data,
+                    event: obj
                     //$target: this.$scope.$eval(this.$scope.value)
                 });
             } else {
                 this.leave.emit({
-                    $data: obj.data,
-                    $event: obj
+                    data: obj.data,
+                    event: obj
                     //$target: this.$scope.$eval(this.$scope.value)
                 });
             }

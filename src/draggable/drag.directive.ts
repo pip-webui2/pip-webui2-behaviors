@@ -17,10 +17,13 @@ export class PipDragDirective implements OnInit, AfterViewInit, OnDestroy {
 
     @Input() allowTransform: boolean = false;
     @Input() dragData: any;
-    @Input() verticalScroll: boolean;
+    @Input() verticalScroll: boolean = true;
     @Input() horizontalScroll: boolean;
-    @Input() activationDistance: number;
-    @Input() scrollContainer: any = window;
+    @Input() activationDistance: number = 75;
+    @Input() set scrollContainer(container: string) {
+        this._scrollContainer = document.querySelector(container);
+    }
+    @Input() scrollParent: boolean = false;
     @Input() public set drag(newVal: any) {
         this.onEnableChange(newVal, this.prevDrag);
         this.prevDrag = newVal;
@@ -40,9 +43,12 @@ export class PipDragDirective implements OnInit, AfterViewInit, OnDestroy {
     private _mrx: number;
     private _mry: number;
     private _hasTouch: boolean = ('ontouchstart' in window) || (<any>window).DocumentTouch; // && document instanceof DocumentTouch; // DocumentTouch is not defined!
-    private _pressEvents: string = 'touchstart mousedown';
-    private _moveEvents: string = 'touchmove mousemove';
-    private _releaseEvents: string = 'touchend mouseup';
+    private _pressEvent: string = 'mousedown';
+    private _touchEvent: string = 'touchstart';
+    private _moveEvents: string = 'mousemove';
+    private _touchMoveEvent: string = 'touchmove';
+    private _releaseEvents: string = 'mouseup';
+    private _touchReleaseEvents: string = 'touchend';
     private _dragHandle: any;
 
     private _myid: string | number;
@@ -50,25 +56,34 @@ export class PipDragDirective implements OnInit, AfterViewInit, OnDestroy {
 
     private _dragOffset: any = null;
 
-    private _dragEnabled: boolean = false;
+    private _dragEnabled: boolean = true;
 
     private _pressTimer: any = null;
 
     private _elementStyle: any = {};
 
     private getDragData: any;
-    private scrollDistance: number;
-    private scrollParent: boolean = false;
+    private scrollDistance: number = 50;
+    private _scrollContainer: any = window;
 
     private prevDrag: any = null;
     private prevCenterAnchor: any = null;
+
+    private _moveListener: any;
+    private _releaseListener: any;
 
     constructor(
         private elRef: ElementRef,
         private renderer: Renderer,
         private draggableService: PipDraggableService
     ) {
+        this._moveListener = (event) => {
+            this.onmove(event);
+        };
 
+        this._releaseListener = (event) => {
+            this.onrelease(event);
+        };
     }
 
     ngOnInit() { }
@@ -99,7 +114,7 @@ export class PipDragDirective implements OnInit, AfterViewInit, OnDestroy {
 
             // Initialize scroll container
             if (this.scrollParent) {
-                this.scrollContainer = this.elRef.nativeElement.parentElement;
+                this._scrollContainer = this.elRef.nativeElement.parentElement;
             }
         }
     }
@@ -110,12 +125,13 @@ export class PipDragDirective implements OnInit, AfterViewInit, OnDestroy {
         // wire up touch events
         if (this._dragHandle) {
             // handle(s) specified, use those to initiate drag
-            this._dragHandle.on(this._pressEvents, (event) => {
+            this._dragHandle.on(this._pressEvent, (event) => {
                 this.onpress(event);
             });
         } else {
             // no handle(s) specified, use the element as the handle
-            this.renderer.listen(this.elRef.nativeElement, this._pressEvents, (event) => {
+            this.renderer.listen(this.elRef.nativeElement, this._pressEvent, (event) => {
+                console.log('pressed');
                 this.onpress(event);
             });
         }
@@ -141,7 +157,7 @@ export class PipDragDirective implements OnInit, AfterViewInit, OnDestroy {
 
     private isClickableElement(evt: any) {
         return (
-            !_.isUndefined(evt.target.attributes.contains("pip-cancel-drag") || evt.target.attributes.contains("pipCancelDrag"))
+            _.isUndefined(evt.target.attributes.getNamedItem("pip-cancel-drag") || evt.target.attributes.getNamedItem("pipCancelDrag"))
         );
     }
 
@@ -227,16 +243,13 @@ export class PipDragDirective implements OnInit, AfterViewInit, OnDestroy {
             this._ty = this._my - this._mry - window.pageYOffset;
         }
 
-        document.addEventListener(this._moveEvents, (event) => {
-            this.onmove(event);
-        });
-        document.addEventListener(this._releaseEvents, (event) => {
-            this.onrelease(event);
-        });
+        document.addEventListener(this._moveEvents, this._moveListener);
+        document.addEventListener(this._releaseEvents, this._releaseListener);
     }
 
     private onmove(evt) {
         if (!this._dragEnabled) return;
+        console.log();
         evt.preventDefault();
         if (!this.elRef.nativeElement.classList.contains('pip-dragging')) {
             this._data = this.dragData;
@@ -312,14 +325,14 @@ export class PipDragDirective implements OnInit, AfterViewInit, OnDestroy {
             uid: this._myid
         });
         this.elRef.nativeElement.classList.remove('pip-dragging');
-        let dragEnterelemets = this.elRef.nativeElement.parentElement.getElementsByClass('pip-drag-enter');
-        _.each(dragEnterelemets, (element: HTMLElement) => {
+        let dragEnterElemets = this.elRef.nativeElement.parentElement.getElementsByClassName('pip-drag-enter');
+        _.each(dragEnterElemets, (element: HTMLElement) => {
             element.classList.remove('pip-drag-enter');
         });
 
         this.reset();
-        document.removeEventListener(this._moveEvents);
-        document.removeEventListener(this._releaseEvents);
+        document.removeEventListener(this._moveEvents, this._moveListener);
+        document.removeEventListener(this._releaseEvents, this._releaseListener);
         if (this.dragStop) {
             this.dragStop.emit({
                 $data: this._data,
@@ -338,68 +351,37 @@ export class PipDragDirective implements OnInit, AfterViewInit, OnDestroy {
     }
 
     private reset() {
-        if (this.allowTransform) {
-            // this.$element.css({
-            //     transform: '',
-            //     'z-index': '',
-            //     '-webkit-transform': '',
-            //     '-ms-transform': ''
-            // });
-            this.elRef.nativeElement.style.cssText = 'transform: "", z-index: "", -webkit-transform: "", -ms-transform: ""';
-        } else {
-            // this.$element.css({
-            //     position: this._elementStyle.position,
-            //     top: this._elementStyle.top,
-            //     left: this._elementStyle.left,
-            //     'z-index': '',
-            //     width: this._elementStyle.width
-            // });
-            this.elRef.nativeElement.style.cssText = 'position:' + this._elementStyle.position
-                + ', top:' + this._elementStyle.top
-                + ', left:' + this._elementStyle.left
-                + ', z-index:"", width:' + this._elementStyle.width;
-        }
+        this.renderer.setElementStyle(this.elRef.nativeElement, 'position', this._elementStyle.position);
+        this.renderer.setElementStyle(this.elRef.nativeElement, 'top', this._elementStyle.top);
+        this.renderer.setElementStyle(this.elRef.nativeElement, 'left', this._elementStyle.left);
+        this.renderer.setElementStyle(this.elRef.nativeElement, 'z-index', '');
+        this.renderer.setElementStyle(this.elRef.nativeElement, 'width', this._elementStyle.width);
     }
 
     private moveElement(x, y) {
-        const eWidth = this.elRef.nativeElement.style.width;
-        if (this.allowTransform) {
-            // this.$element.css({
-            //     transform: 'matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, ' + x + ', ' + y + ', 0, 1)',
-            //     'z-index': 99999,
-            //     '-webkit-transform': 'matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, ' + x + ', ' + y + ', 0, 1)',
-            //     '-ms-transform': 'matrix(1, 0, 0, 1, ' + x + ', ' + y + ')'
-            // });
-        } else {
-            // this.$element.css({
-            //     'left': x + 'px',
-            //     'top': y + 'px',
-            //     'position': 'fixed',
-            //     'z-index': 100,
-            //     width: eWidth
-            // });
-            this.elRef.nativeElement.style.cssText = 'position:' + this._elementStyle.position
-                + ', top:' + x + 'px'
-                + ', left:' + y + 'px'
-                + ', positions: fixed',
-                + ', z-index: 100, width:' + eWidth;
-        }
+        const eWidth = this.elRef.nativeElement.style.width ?
+            this.elRef.nativeElement.style.width : this.elRef.nativeElement.offsetWidth;
+        this.renderer.setElementStyle(this.elRef.nativeElement, 'position', 'fixed');
+        this.renderer.setElementStyle(this.elRef.nativeElement, 'top', y + 'px');
+        this.renderer.setElementStyle(this.elRef.nativeElement, 'left', x + 'px');
+        this.renderer.setElementStyle(this.elRef.nativeElement, 'z-index', '100');
+        this.renderer.setElementStyle(this.elRef.nativeElement, 'width', eWidth + 'px');
     }
 
     private dragToScroll() {
         let scrollX = 0,
             scrollY = 0,
             offset = (element) => {
-                return element.offset() || {
-                    left: 0,
-                    top: 0
+                return {
+                    left: element.getBoundingClientRect().left || 0,
+                    top: element.getBoundingClientRect().top || 0
                 };
             };
 
         if (this.horizontalScroll) {
             const
-                containerLeft = offset(this.scrollContainer).left,
-                containerWidth = this.scrollContainer.innerWidth(),
+                containerLeft = offset(this._scrollContainer).left,
+                containerWidth = this._scrollContainer.offsetWidth,
                 containerRight = containerLeft + containerWidth;
 
             if ((this._mx - containerLeft) < this.activationDistance) {
@@ -411,8 +393,8 @@ export class PipDragDirective implements OnInit, AfterViewInit, OnDestroy {
 
         if (this.verticalScroll) {
             const
-                containerTop = offset(this.scrollContainer).top,
-                containerHeight = this.scrollContainer.innerHeight(),
+                containerTop = offset(this._scrollContainer).top,
+                containerHeight = this._scrollContainer.offsetHeight,
                 containerBottom = containerTop + containerHeight;
 
             if ((this._my - containerTop) < this.activationDistance) {
@@ -423,11 +405,11 @@ export class PipDragDirective implements OnInit, AfterViewInit, OnDestroy {
         }
         if (scrollX !== 0 || scrollY !== 0) {
             const
-                containerScrollLeft = this.scrollContainer.scrollLeft(),
-                containerScrollTop = this.scrollContainer.scrollTop();
+                containerScrollLeft = this._scrollContainer.scrollLeft,
+                containerScrollTop = this._scrollContainer.scrollTop;
 
-            this.scrollContainer.scrollLeft(containerScrollLeft + scrollX);
-            this.scrollContainer.scrollTop(containerScrollTop + scrollY);
+            this._scrollContainer.scrollLeft = containerScrollLeft + scrollX;
+            this._scrollContainer.scrollTop = containerScrollTop + scrollY;
         }
 
     }

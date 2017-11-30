@@ -4,7 +4,7 @@ import { DraggableListener } from './draggable-listner.model';
 
 @Injectable()
 export class PipDraggableService {
-    private _listeners: DraggableListener[];
+    private _listeners: DraggableListener[] = [];
 
     public inputEvent(event) {
         if (!_.isUndefined(event.touches)) {

@@ -11,6 +11,8 @@ import { KEY_CODE } from '../shared/key-code.model';
 })
 export class PipInfiniteScrollDirective implements OnDestroy {
     @Input() set scrollParent(parent: boolean) {
+        console.log('parent', parent);
+        console.log('his.elRef.nativeElement.parentElement', this.elRef.nativeElement.parentElement);
         this.changeContainer(parent ? this.elRef.nativeElement.parentElement : this.elRef.nativeElement);
     }
     @Input() set immediateCheck(check: any) {
@@ -44,7 +46,7 @@ export class PipInfiniteScrollDirective implements OnDestroy {
         private renderer: Renderer
     ) {
         this.windowElement = window;
-
+console.log('infinite scroll here');
         this.onContainerScrollThrottle = _.throttle(() => {
             this.onContainerScroll();
         }, this.THROTTLE_MILLISECONDS);
@@ -69,10 +71,10 @@ export class PipInfiniteScrollDirective implements OnDestroy {
     }
 
     private offsetTop(element) {
-        if (!element[0].getBoundingClientRect || element.css('none')) {
+        if (!element.getBoundingClientRect) {
             return;
         }
-        return element[0].getBoundingClientRect().top + this.pageYOffset(element);
+        return element.getBoundingClientRect().top + this.pageYOffset(element);
     }
 
     private pageYOffset(element) {
@@ -89,6 +91,7 @@ export class PipInfiniteScrollDirective implements OnDestroy {
             containerTopOffset,
             elementBottom,
             remaining,
+            result,
             shouldScroll;
 
         if (this._scrollContainer === this.windowElement) {
@@ -108,8 +111,9 @@ export class PipInfiniteScrollDirective implements OnDestroy {
         }
 
         remaining = elementBottom - containerBottom;
-        shouldScroll = remaining <= this.height(this._scrollContainer) * this.scrollDistance + 1;
-
+        result = this.height(this._scrollContainer) * this._scrollDistance + 1;
+        shouldScroll = remaining <= result;
+        
         if (shouldScroll) {
             this.checkWhenEnabled = true;
             if (this.scrollEnabled) {
