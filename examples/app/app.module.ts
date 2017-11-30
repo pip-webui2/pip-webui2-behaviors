@@ -13,8 +13,20 @@ import { ExampleListModule } from './examples-list/examples-list.module';
 import { SelectedExampleModule } from './selected/selected-example.module';
 import { SelectedExampleComponent } from './selected/selected-example.component';
 
+import { FocusedExampleModule } from './focused/focused-example.module';
+import { FocusedExampleComponent } from './focused/focused-example.component';
+
+import { InfiniteScrollExampleModule } from './infinite-scroll/infinite-scroll-example.module';
+import { InfiniteScrollExampleComponent } from './infinite-scroll/infinite-scroll-example.component';
+
+import { DraggableExampleModule } from './draggable/draggable-example.module';
+import { DraggableExampleComponent } from './draggable/draggable-example.component';
+
 const appRoutes: Routes = [
   { path: 'selected', component: SelectedExampleComponent },
+  { path: 'focused', component: FocusedExampleComponent },
+  { path: 'infinite_scroll', component: InfiniteScrollExampleComponent },
+  { path: 'draggable', component: DraggableExampleComponent },
   { path: '', pathMatch: 'full', redirectTo: 'selected' }
 ];
 
@@ -36,6 +48,9 @@ const appRoutes: Routes = [
 
     ExampleListModule,
     SelectedExampleModule,
+    FocusedExampleModule,
+    InfiniteScrollExampleModule,
+    DraggableExampleModule,
 
     RouterModule.forRoot(appRoutes, { useHash: true })
   ],

@@ -15,8 +15,23 @@ export class AppComponent implements AfterViewInit {
   public list:  ExmapleListItem[] = [
     {
       name: 'Selected',
-      id: 'selectd',
+      id: 'selected',
       route: 'selected'
+    },
+    {
+      name: 'Focused',
+      id: 'focused',
+      route: 'focused'
+    },
+    {
+      name: 'Infinite scroll',
+      id: 'infinite-scroll',
+      route: 'infinite_scroll'
+    },
+    {
+      name: 'Draggable',
+      id: 'draggable',
+      route: 'draggable'
     }
   ];
 
