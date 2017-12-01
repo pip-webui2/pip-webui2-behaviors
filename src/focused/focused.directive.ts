@@ -160,7 +160,6 @@ export class PipFocusedDirective implements AfterViewInit {
             const
                 increment = (keyCode == KEY_CODE.RIGHT_ARROW || keyCode == KEY_CODE.DOWN_ARROW) ? 1 : -1,
                 moveToControl = this.getElementIndex(this.controls) + increment;
-                console.log('moveToControl', moveToControl);
             // Move focus to next control
             if (moveToControl >= 0 && moveToControl < this.controlsLength) {
                 this.controls[moveToControl].focus();
@@ -169,7 +168,6 @@ export class PipFocusedDirective implements AfterViewInit {
     }
 
     private getElementIndex(elements) {
-        console.log('this._focusedClass', this._focusedClass);
         for (let i = 0; i < elements.length; i++) {
             if (elements[i].classList.contains(this._focusedClass)) return i;
         }
