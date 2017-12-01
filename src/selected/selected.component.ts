@@ -23,6 +23,7 @@ export class PipSelectedComponent implements OnInit, AfterViewInit {
     @Input() public selectedItemClass: string = 'pip-selected-item';
 
     @Output() onSelect: EventEmitter<any> = new EventEmitter<any>();
+    @Output() onEnterSpacePress: EventEmitter<any> = new EventEmitter<any>();
 
     ngOnInit() { }
 
@@ -110,40 +111,27 @@ export class PipSelectedComponent implements OnInit, AfterViewInit {
     };
 
     private scrollToItem(item: any) {
+        let offset = (element) => {
+            return {
+                left: element.getBoundingClientRect().left || 0,
+                top: element.getBoundingClientRect().top || 0
+            };
+        };
+
         const
-            containerTop = this.elRef.nativeElement.offsetTop,
+            containerTop = offset(this.elRef.nativeElement).top,
             containerHeight = this.elRef.nativeElement.offsetHeight,
             containerBottom = containerTop + containerHeight,
-            itemTop = item.offsetTop,
+            itemTop = offset(item).top,
             itemHeight = item.offsetHeight,
             itemBottom = itemTop + itemHeight,
             containerScrollTop = this.elRef.nativeElement.scrollTop;
 
-        //this.isScrolled = true;
-        // console.log('containerScrollTop', containerScrollTop);
-        // console.log('itemTop', itemTop);
-        // console.log('containerTop', containerTop);
-        // console.log('containerBottom', containerBottom);
-        // console.log('itemBottom', itemBottom);
-
-        // if (containerTop > itemTop) {
-        //     console.log('first');
-        //     this.elRef.nativeElement.scrollTop = containerScrollTop + itemTop - containerTop;
-        // } else if (containerBottom < itemBottom) {
-        //     this.elRef.nativeElement.scrollTop = containerScrollTop + itemBottom - containerBottom;
-        // } else {
-        //     this.elRef.nativeElement.scrollTop = itemTop - containerTop;
-        // }
-
-        //this.elRef.nativeElement.scrollTop = itemTop - containerTop;
-        // if (itemBottom > containerBottom + containerScrollTop) {
-        //     console.log('first');
-        //     this.elRef.nativeElement.scrollTop = containerScrollTop + itemTop - containerTop;
-        // } else if (containerBottom > itemBottom) {
-        //     this.elRef.nativeElement.scrollTop = itemTop - containerTop;
-        // }
-
-        this.elRef.nativeElement.scrollTop = itemTop - containerTop;
+        if (containerTop > itemTop) {
+            this.elRef.nativeElement.scrollTop = containerScrollTop + itemTop - containerTop;
+        } else if (containerBottom < itemBottom) {
+            this.elRef.nativeElement.scrollTop = containerScrollTop + itemBottom - containerBottom;
+        }
     }
 
     public onClickEvent = (element) => {
@@ -160,15 +148,15 @@ export class PipSelectedComponent implements OnInit, AfterViewInit {
             event.preventDefault();
             event.stopPropagation();
 
-            /*if (this.enterSpaceGetter) {
-                this.enterSpaceGetter(this.$scope, {
-                    $event: {
-                        target: this.$element,
-                        index: this.selectedIndex,
-                        item: this.$element.find('.selected')
+            if (this.onEnterSpacePress) {
+                this.onEnterSpacePress.emit({
+                    event: {
+                        target: this.elRef.nativeElement,
+                        index: this._index,
+                        item: this.elRef.nativeElement.querySelector('.selected')
                     }
                 });
-            }*/
+            }
 
         } else
             if (keyCode == KEY_CODE.LEFT_ARROW || keyCode == KEY_CODE.RIGHT_ARROW ||
