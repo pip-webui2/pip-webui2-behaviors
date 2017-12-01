@@ -8,6 +8,8 @@ import { Component } from '@angular/core';
 })
 export class DraggableExampleComponent {
 
+  private virtualElementIndex: number = null; 
+
   constructor() {
 
   }
@@ -16,7 +18,7 @@ export class DraggableExampleComponent {
     //console.log('event', event);
   }
 
-  public content = [
+  public content: any[] = [
     {
       color: { 'background-color': '#F1F8E9' },
       name: 'F1F8E9'
@@ -62,8 +64,13 @@ export class DraggableExampleComponent {
     }
   ];
 
-  public onDragStart = () => {
+  public onDragStart = (event, index) => {
+     //this.virtualElementIndex = index;
+     //this.content.splice(index, 0, { color: { 'background-color': '' }, name: '', virtual: true });
+  }
 
+  public onEnter(event, index) {
+    
   }
 
   public onDragMove = () => {
@@ -77,8 +84,13 @@ export class DraggableExampleComponent {
   public onDropSuccess = (event, index) => {
     const otherObj = this.content[index];
     const otherIndex = this.content.indexOf(event.data);
+    if (otherIndex === index || otherIndex === -1) return;
+
     this.content.splice(otherIndex, 1);
     if (index > otherIndex) this.content.splice(index, 0, event.data);
     else this.content.splice(index + 1, 0, event.data);
+
+    //this.content.splice(this.virtualElementIndex, 1);
+    //this.virtualElementIndex = null;
   }
 }

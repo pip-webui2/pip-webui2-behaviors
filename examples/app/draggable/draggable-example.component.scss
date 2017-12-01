@@ -41,8 +41,15 @@
 }
 
 .drag-scroll [pipDrop].pip-drag-enter div {
-    height: 55px;
-    margin-bottom: 30px !important;
+    //height: 55px;
+}
+
+.drag-scroll [pipDrop] {
+    transition: padding .35s ease;
+}
+
+.drag-scroll [pipDrop].pip-drag-enter:not(.virtual) {
+    padding-bottom: 85px !important;
 }
 
 .drag-scroll [pipDrop] div {

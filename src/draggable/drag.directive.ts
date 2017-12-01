@@ -3,11 +3,7 @@ import { Directive, ElementRef, OnInit, AfterViewInit, OnDestroy, Renderer, Host
 import { PipDraggableService } from './shared/draggable.service';
 
 @Directive({
-    selector: '[pipDrag]',
-    /*host: {
-        '(click)': 'click()',
-        '(keypress)': 'keydown()'
-    }*/
+    selector: '[pipDrag]'
 })
 export class PipDragDirective implements OnInit, AfterViewInit, OnDestroy {
     @Output() dragStart: EventEmitter<any> = new EventEmitter<any>();
@@ -131,7 +127,6 @@ export class PipDragDirective implements OnInit, AfterViewInit, OnDestroy {
         } else {
             // no handle(s) specified, use the element as the handle
             this.renderer.listen(this.elRef.nativeElement, this._pressEvent, (event) => {
-                console.log('pressed');
                 this.onpress(event);
             });
         }
@@ -249,7 +244,7 @@ export class PipDragDirective implements OnInit, AfterViewInit, OnDestroy {
 
     private onmove(evt) {
         if (!this._dragEnabled) return;
-        console.log();
+ 
         evt.preventDefault();
         if (!this.elRef.nativeElement.classList.contains('pip-dragging')) {
             this._data = this.dragData;

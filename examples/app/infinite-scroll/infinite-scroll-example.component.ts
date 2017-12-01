@@ -9,6 +9,7 @@ import { Component } from '@angular/core';
 export class InfiniteScrollExampleComponent {
 
   public items: any[] = [];
+  private _itemCount: number = 0;
 
   constructor() {
     this.generateItems(20);
@@ -23,16 +24,15 @@ export class InfiniteScrollExampleComponent {
     console.log('Generating ' + count + ' items');
 
     let
-      itemCount = 0,
       colors = ['red', 'blue', 'yellow', 'green'];
 
     for (let i = 0; i < count; i++) {
       let item = {
-        id: itemCount,
-        name: 'Item ' + itemCount,
+        id: this._itemCount,
+        name: 'Item ' + this._itemCount,
         color: colors[_.random(0, colors.length - 1)]
       };
-      itemCount++;
+      this._itemCount++;
 
       this.items.push(item);
     }

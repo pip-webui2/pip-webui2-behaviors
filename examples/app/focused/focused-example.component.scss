@@ -1,4 +1,10 @@
 .mat-card {
-    display: inline-block;
     padding: 0;
+    margin: 8px;
+}
+
+.button {
+    background-color: rgba(0, 0, 0, 0.16); 
+    border-radius: 2px; 
+    padding: 4px
 }

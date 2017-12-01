@@ -9,9 +9,11 @@
 				 forceTouch = "true"
 				 touchDelay="100"
 				 (dropSuccess)="onDropSuccess($event, i)"
-				 (dragStart)="onDragStart($data, $event)"
-				 (dragStop)="onDragStop($data, $event)"
-				 (dragMove)="onDragMove($data, $event)">
+				 (dragStart)="onDragStart($event, i)"
+				 (dragStop)="onDragStop($event)"
+				 (dragMove)="onDragMove($event)"
+				 (enter)="onEnter($event, i)"
+				 [ngClass]="{'virtual': obj.virtual}">
 				 <div class="content" [ngStyle]="obj.color">
 					 <p>{{ obj.name }}</p>
 				 </div>
