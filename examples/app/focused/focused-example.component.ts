@@ -27,6 +27,14 @@ export class FocusedExampleComponent {
     },                                
 ]; 
 
+  public remove() {
+    this.collection.splice(0 , 1);
+  }
+
+  public add() {
+    this.collection.push({ id: 57, text: '' });
+  }
+
   public onSelect(event) {
     //console.log('event', event);
   }

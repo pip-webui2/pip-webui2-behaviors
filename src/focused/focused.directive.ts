@@ -21,6 +21,7 @@ export class PipFocusedDirective implements AfterViewInit {
     private opacityDelta: number = 0.04;
     private opacityLimit: number = 0.1;
     private oldBackgroundColor: string;
+    private _prevTrigger: any = null;
 
     @Input() focusedOpacityClass: string = 'pip-focused-opaicty'
 
@@ -43,6 +44,15 @@ export class PipFocusedDirective implements AfterViewInit {
     @Input() focusedData: any;
     @Input() withHidden: boolean = true;
     @Input() onFocusClass: string = '';
+    @Input() set dynamicTrigger(changed: any) {
+        if (this._prevTrigger == null) this._prevTrigger = changed;
+        else if (this._prevTrigger != changed) {
+            setTimeout(() => {
+                this.init();
+            });
+            this._prevTrigger = changed;
+        }
+    }
 
     @Output() onEnterSpacePress: EventEmitter<any> = new EventEmitter<any>();
     @Output() onDeletePress: EventEmitter<any> = new EventEmitter<any>();
@@ -54,11 +64,9 @@ export class PipFocusedDirective implements AfterViewInit {
         renderer.setElementAttribute(this.elRef.nativeElement, 'tabindex', '1');
         renderer.setElementStyle(this.elRef.nativeElement, 'outline', 'none');
         renderer.listen(elRef.nativeElement, 'keydown', (event) => {
-            this.setControls();
             this.keydownListener(event);
         });
         renderer.listen(elRef.nativeElement, 'focus', () => {
-            this.setControls();
             if (this.controls.length > 0) this.controls[0].focus();
         });
     }

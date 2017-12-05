@@ -37,6 +37,16 @@
         </mat-list>
     </mat-card>
 </div>
+
+<mat-card pipFocused pipFocusedOpacity="true" [dynamicTrigger]="collection.length" focusedColor="#EF6C00" focusedData="collection">
+    <mat-list class="pip-menu pip-ref-list" style="padding: 0px">
+        <mat-list-item class="pip-focusable " tabindex="-1" *ngFor="let element of collection; let i = index">
+            Focusable element {{ i }}
+        </mat-list-item>
+    </mat-list>
+</mat-card>
+<button (click)="remove()">remove</button>
+<button (click)="add()">add</button>
 <!--div class="layout-row layout-align-start-start" fxLayout="row" fxLayoutAlign="start start">
     <div pipFocused focusedColor="'#EF6C00'" focusedClass="'white-text'" style="display: inline-block;">
         <p>Focusable elements:</p>
