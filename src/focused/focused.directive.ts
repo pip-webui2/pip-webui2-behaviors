@@ -54,6 +54,7 @@ export class PipFocusedDirective implements AfterViewInit {
         renderer.setElementAttribute(this.elRef.nativeElement, 'tabindex', '1');
         renderer.setElementStyle(this.elRef.nativeElement, 'outline', 'none');
         renderer.listen(elRef.nativeElement, 'keydown', (event) => {
+            this.setControls();
             this.keydownListener(event);
         });
         renderer.listen(elRef.nativeElement, 'focus', () => {
@@ -182,6 +183,14 @@ export class PipFocusedDirective implements AfterViewInit {
         } else if (keyCode == KEY_CODE.DELETE || keyCode == KEY_CODE.BACKSPACE) {
             let index = this.getElementIndex(this.controls);
             this.onDeletePress.emit({ event: e, index: index });
+            setTimeout(() => {
+                this.setControls();
+                if (index < this.controls.length) this.controls[index].focus();
+                else if (this.controls.length > 0) {
+                    while(index >= this.controls.length && index > -1) index--;
+                    this.controls[index].focus();
+                }
+            }, 200);
         }
     }
 
