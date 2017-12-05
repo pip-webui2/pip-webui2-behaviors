@@ -57,13 +57,18 @@ export class PipFocusedDirective implements AfterViewInit {
             this.keydownListener(event);
         });
         renderer.listen(elRef.nativeElement, 'focus', () => {
+            this.setControls();
             if (this.controls.length > 0) this.controls[0].focus();
         });
     }
 
-    private init() {
+    private setControls() {
         const selector = this.withHidden ? '.pip-focusable' : '.pip-focusable:visible';
         this.controls = this.elRef.nativeElement.querySelectorAll(selector);
+    }
+
+    private init() {
+        this.setControls();
         this.controlsLength = this.controls.length;
         this.checkTabindex(this.controls);
         // Add event listeners
@@ -173,10 +178,10 @@ export class PipFocusedDirective implements AfterViewInit {
             }
         } else if (keyCode == KEY_CODE.ENTER || keyCode == KEY_CODE.SPACE) {
             let index = this.getElementIndex(this.controls);
-            this.onEnterSpacePress.emit({event: e, index: index});
+            this.onEnterSpacePress.emit({ event: e, index: index });
         } else if (keyCode == KEY_CODE.DELETE || keyCode == KEY_CODE.BACKSPACE) {
             let index = this.getElementIndex(this.controls);
-            this.onDeletePress.emit({event: e, index: index});
+            this.onDeletePress.emit({ event: e, index: index });
         }
     }
 
