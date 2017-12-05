@@ -44,10 +44,13 @@ export class PipFocusedDirective implements AfterViewInit {
     @Input() withHidden: boolean = true;
     @Input() onFocusClass: string = '';
 
+    @Output() onEnterSpacePress: EventEmitter<any> = new EventEmitter<any>();
+    @Output() onDeletePress: EventEmitter<any> = new EventEmitter<any>();
+
     constructor(
         private elRef: ElementRef,
         private renderer: Renderer
-    ) { 
+    ) {
         renderer.setElementAttribute(this.elRef.nativeElement, 'tabindex', '1');
         renderer.setElementStyle(this.elRef.nativeElement, 'outline', 'none');
         renderer.listen(elRef.nativeElement, 'keydown', (event) => {
@@ -168,6 +171,10 @@ export class PipFocusedDirective implements AfterViewInit {
             if (moveToControl >= 0 && moveToControl < this.controlsLength) {
                 this.controls[moveToControl].focus();
             }
+        } else if (keyCode == KEY_CODE.ENTER || keyCode == KEY_CODE.SPACE) {
+            this.onEnterSpacePress.emit(e);
+        } else if (keyCode == KEY_CODE.DELETE || keyCode == KEY_CODE.BACKSPACE) {
+            this.onDeletePress.emit(e);
         }
     }
 

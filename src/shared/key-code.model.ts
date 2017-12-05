@@ -5,4 +5,6 @@ export class KEY_CODE {
     public static RIGHT_ARROW = 39;
     public static ENTER = 13;
     public static SPACE = 32;
+    public static DELETE = 46;
+    public static BACKSPACE = 8;
 }
