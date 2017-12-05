@@ -172,9 +172,11 @@ export class PipFocusedDirective implements AfterViewInit {
                 this.controls[moveToControl].focus();
             }
         } else if (keyCode == KEY_CODE.ENTER || keyCode == KEY_CODE.SPACE) {
-            this.onEnterSpacePress.emit(e);
+            let index = this.getElementIndex(this.controls);
+            this.onEnterSpacePress.emit({event: e, index: index});
         } else if (keyCode == KEY_CODE.DELETE || keyCode == KEY_CODE.BACKSPACE) {
-            this.onDeletePress.emit(e);
+            let index = this.getElementIndex(this.controls);
+            this.onDeletePress.emit({event: e, index: index});
         }
     }
 
