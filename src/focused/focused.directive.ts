@@ -49,7 +49,7 @@ export class PipFocusedDirective implements AfterViewInit {
         else if (this._prevTrigger != changed) {
             setTimeout(() => {
                 this.init();
-            });
+            }, 500);
             this._prevTrigger = changed;
         }
     }
