@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
 import { Injectable } from '@angular/core';
-import { DraggableListener } from './draggable-listner.model';
+import { DraggableListener } from './draggable-listener.model';
 
 @Injectable()
 export class PipDraggableService {

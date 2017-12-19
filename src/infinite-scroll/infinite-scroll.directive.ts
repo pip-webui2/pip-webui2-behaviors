@@ -11,8 +11,6 @@ import { KEY_CODE } from '../shared/key-code.model';
 })
 export class PipInfiniteScrollDirective implements OnDestroy {
     @Input() set scrollParent(parent: boolean) {
-        console.log('parent', parent);
-        console.log('his.elRef.nativeElement.parentElement', this.elRef.nativeElement.parentElement);
         this.changeContainer(parent ? this.elRef.nativeElement.parentElement : this.elRef.nativeElement);
     }
     @Input() set immediateCheck(check: any) {
@@ -46,7 +44,6 @@ export class PipInfiniteScrollDirective implements OnDestroy {
         private renderer: Renderer
     ) {
         this.windowElement = window;
-console.log('infinite scroll here');
         this.onContainerScrollThrottle = _.throttle(() => {
             this.onContainerScroll();
         }, this.THROTTLE_MILLISECONDS);

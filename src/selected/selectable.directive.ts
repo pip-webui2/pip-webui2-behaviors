@@ -31,8 +31,6 @@ export class PipSelectableDirective {
         this.onClickEvent(this.elRef.nativeElement);
     }
 
-    keydown() {
-        console.log('here');
-    }
+    keydown() { }
 
 }

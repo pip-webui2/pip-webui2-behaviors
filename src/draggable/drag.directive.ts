@@ -14,12 +14,12 @@ export class PipDragDirective implements OnInit, AfterViewInit, OnDestroy {
     @Input() allowTransform: boolean = false;
     @Input() dragData: any;
     @Input() verticalScroll: boolean = true;
+    @Input() scrollParent: boolean = false;
     @Input() horizontalScroll: boolean;
     @Input() activationDistance: number = 75;
     @Input() set scrollContainer(container: string) {
         this._scrollContainer = document.querySelector(container);
     }
-    @Input() scrollParent: boolean = false;
     @Input() public set drag(newVal: any) {
         this.onEnableChange(newVal, this.prevDrag);
         this.prevDrag = newVal;
