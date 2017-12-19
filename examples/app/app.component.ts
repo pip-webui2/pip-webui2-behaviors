@@ -29,7 +29,7 @@ export const AppTranslations = {
     'EXAMPLES.FOCUSABLE_ELEMENT': 'Фокусируемый элемент',
     'EXAMPLES.SELECTED_DESCRIPTION': 'позволяет перемещаться по нефокусируемым элементам управления с помощью клавиш со стрелками',
     'EXAMPLES.INFINITE_SCROLL_DESCRIPTION': 'позволяет загружать данные частями во время прокрутки пользователя',
-    'EXAMPLES.DRAGGABLE_DESCRIPTION': 'реализации функции перетаскивания (drag&drop)'
+    'EXAMPLES.DRAGGABLE_DESCRIPTION': 'реализация функции перетаскивания (drag & drop)'
   }
 };
 
