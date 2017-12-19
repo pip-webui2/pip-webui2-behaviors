@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { MatButtonModule, MatInputModule, MatListModule, MatToolbarModule, MatCardModule } from '@angular/material';
-
+import { TranslateModule } from '@ngx-translate/core';
 import { InfiniteScrollExampleComponent } from './infinite-scroll-example.component';
 
 import { PipInfiniteScrollModule } from '../pip-webui2-behaviors';
@@ -23,6 +23,8 @@ import { PipInfiniteScrollModule } from '../pip-webui2-behaviors';
     MatListModule,
     MatToolbarModule,
     MatCardModule,
+
+    TranslateModule,
 
     PipInfiniteScrollModule
   ],

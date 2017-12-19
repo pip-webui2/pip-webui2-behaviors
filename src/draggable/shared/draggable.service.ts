@@ -32,6 +32,10 @@ export class PipDraggableService {
     }
 
     public off(id: string) {
-        //let index = _.
+        let index = _.findIndex(this._listeners, (listener: DraggableListener) => {
+            return id === listener.id;
+        });
+
+        this._listeners.splice(index, 1);
     }
 }

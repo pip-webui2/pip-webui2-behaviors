@@ -1,55 +1,58 @@
-<p>Press
-    <span class="button">Tab</span> to choose card and
+<p>
+    <strong>Focusable</strong> - {{ 'EXAMPLES.FOCUSABLE_DESCRIPTION' | translate }}.
+</p>
+<p>{{ 'EXAMPLES.PRESS' | translate }}
+    <span class="button">Tab</span> {{ 'EXAMPLES.TO_CHOOSE_CARD' | translate }} <!-- to choose card and -->
     <span class="button">up</span>,
     <span class="button">down</span>,
     <span class="button">left</span>,
-    <span class="button">right</span> buttons to change focusable elements in list</p>
+    <span class="button">right</span> {{ 'EXAMPLES.TO_CHANGE_FOCUSABLE_ELEMENTS' | translate }}.</p> <!-- buttons to change focusable elements in list -->
 
 <div fxLayout="row" fxLayoutAlign="center center">
     <mat-card pipFocused pipFocused-color="rgba(255, 255, 255, 1)">
         <mat-list class="pip-menu pip-ref-list" style="padding: 0px">
-            <mat-list-item class="pip-focusable" tabindex="-1">Focusable element</mat-list-item>
-            <mat-list-item class="pip-focusable" tabindex="-1">Focusable element</mat-list-item>
-            <mat-list-item class="pip-focusable " tabindex="-1">Focusable element</mat-list-item>
-            <mat-list-item class="pip-focusable " tabindex="-1">Focusable element</mat-list-item>
-            <mat-list-item class="pip-focusable " tabindex="-1">Focusable element</mat-list-item>
-            <mat-list-item class="pip-focusable " tabindex="-1">Focusable element</mat-list-item>
+            <mat-list-item class="pip-focusable" tabindex="-1">{{ 'EXAMPLES.FOCUSABLE_ELEMENT' | translate }}</mat-list-item>
+            <mat-list-item class="pip-focusable" tabindex="-1">{{ 'EXAMPLES.FOCUSABLE_ELEMENT' | translate }}</mat-list-item>
+            <mat-list-item class="pip-focusable " tabindex="-1">{{ 'EXAMPLES.FOCUSABLE_ELEMENT' | translate }}</mat-list-item>
+            <mat-list-item class="pip-focusable " tabindex="-1">{{ 'EXAMPLES.FOCUSABLE_ELEMENT' | translate }}</mat-list-item>
+            <mat-list-item class="pip-focusable " tabindex="-1">{{ 'EXAMPLES.FOCUSABLE_ELEMENT' | translate }}</mat-list-item>
+            <mat-list-item class="pip-focusable " tabindex="-1">{{ 'EXAMPLES.FOCUSABLE_ELEMENT' | translate }}</mat-list-item>
         </mat-list>
     </mat-card>
     <mat-card pipFocused pipFocusedOpacity="true" [focusedData]="collection">
         <mat-list class="pip-menu pip-ref-list" style="padding: 0px">
-            <mat-list-item class="pip-focusable " tabindex="-1">Focusable element</mat-list-item>
-            <mat-list-item class="pip-focusable " tabindex="-1">Focusable element</mat-list-item>
-            <mat-list-item class="pip-focusable " tabindex="-1">Focusable element</mat-list-item>
-            <mat-list-item class="pip-focusable " tabindex="-1">Focusable element</mat-list-item>
-            <mat-list-item class="pip-focusable " tabindex="-1">Focusable element</mat-list-item>
-            <mat-list-item class="pip-focusable " tabindex="-1">Focusable element</mat-list-item>
+            <mat-list-item class="pip-focusable " tabindex="-1">{{ 'EXAMPLES.FOCUSABLE_ELEMENT' | translate }}</mat-list-item>
+            <mat-list-item class="pip-focusable " tabindex="-1">{{ 'EXAMPLES.FOCUSABLE_ELEMENT' | translate }}</mat-list-item>
+            <mat-list-item class="pip-focusable " tabindex="-1">{{ 'EXAMPLES.FOCUSABLE_ELEMENT' | translate }}</mat-list-item>
+            <mat-list-item class="pip-focusable " tabindex="-1">{{ 'EXAMPLES.FOCUSABLE_ELEMENT' | translate }}</mat-list-item>
+            <mat-list-item class="pip-focusable " tabindex="-1">{{ 'EXAMPLES.FOCUSABLE_ELEMENT' | translate }}</mat-list-item>
+            <mat-list-item class="pip-focusable " tabindex="-1">{{ 'EXAMPLES.FOCUSABLE_ELEMENT' | translate }}</mat-list-item>
         </mat-list>
     </mat-card>
     <mat-card pipFocused pipFocusedOpacity="true" focusedColor="#EF6C00" focusedData="collection">
         <mat-list class="pip-menu pip-ref-list" style="padding: 0px">
-            <mat-list-item class="pip-focusable " tabindex="-1">Focusable element</mat-list-item>
-            <mat-list-item class="pip-focusable " tabindex="-1">Focusable element</mat-list-item>
-            <mat-list-item class="pip-focusable " tabindex="-1">Focusable element</mat-list-item>
-            <mat-list-item class="pip-focusable " tabindex="-1">Focusable element</mat-list-item>
-            <mat-list-item class="pip-focusable " tabindex="-1">Focusable element</mat-list-item>
-            <mat-list-item class="pip-focusable " tabindex="-1">Focusable element</mat-list-item>
+            <mat-list-item class="pip-focusable " tabindex="-1">{{ 'EXAMPLES.FOCUSABLE_ELEMENT' | translate }}</mat-list-item>
+            <mat-list-item class="pip-focusable " tabindex="-1">{{ 'EXAMPLES.FOCUSABLE_ELEMENT' | translate }}</mat-list-item>
+            <mat-list-item class="pip-focusable " tabindex="-1">{{ 'EXAMPLES.FOCUSABLE_ELEMENT' | translate }}</mat-list-item>
+            <mat-list-item class="pip-focusable " tabindex="-1">{{ 'EXAMPLES.FOCUSABLE_ELEMENT' | translate }}</mat-list-item>
+            <mat-list-item class="pip-focusable " tabindex="-1">{{ 'EXAMPLES.FOCUSABLE_ELEMENT' | translate }}</mat-list-item>
+            <mat-list-item class="pip-focusable " tabindex="-1">{{ 'EXAMPLES.FOCUSABLE_ELEMENT' | translate }}</mat-list-item>
         </mat-list>
     </mat-card>
 </div>
 
-<mat-card pipFocused pipFocusedOpacity="true" [dynamicTrigger]="collection.length" focusedColor="#EF6C00" focusedData="collection">
+<!-- <mat-card pipFocused pipFocusedOpacity="true" [dynamicTrigger]="collection.length" focusedColor="#EF6C00" focusedData="collection">
     <mat-list class="pip-menu pip-ref-list" style="padding: 0px">
         <mat-list-item class="pip-focusable " tabindex="-1" *ngFor="let element of collection; let i = index">
-            Focusable element {{ i }}
+            {{ 'EXAMPLES.FOCUSABLE_ELEMENT' | translate }} {{ i }}
         </mat-list-item>
     </mat-list>
 </mat-card>
 <button (click)="remove()">remove</button>
-<button (click)="add()">add</button>
+<button (click)="add()">add</button> -->
 <!--div class="layout-row layout-align-start-start" fxLayout="row" fxLayoutAlign="start start">
     <div pipFocused focusedColor="'#EF6C00'" focusedClass="'white-text'" style="display: inline-block;">
-        <p>Focusable elements:</p>
+        <p>{{ 'EXAMPLES.FOCUSABLE_ELEMENT' | translate }}s:</p>
         <div class="layout-row layout-align-start-start" fxLayout="row" fxLayoutAlign="start start">
             <div class="pip-focusable layout-column layout-align-center-center" tabindex="0" style="height: 100px; width: 100px; background-color: rgba(0, 0, 0, 0.16); padding-top: 8px;">
                 <mat-icon mat-svg-icon="icons:plus" style="height: 65px; width: 65px"></mat-icon>

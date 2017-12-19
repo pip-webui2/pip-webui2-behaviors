@@ -129,6 +129,9 @@ export class PipDragDirective implements OnInit, AfterViewInit, OnDestroy {
             this.renderer.listen(this.elRef.nativeElement, this._pressEvent, (event) => {
                 this.onpress(event);
             });
+            this.renderer.listen(this.elRef.nativeElement, this._touchEvent, (event) => {
+                this.onpress(event);
+            });
         }
         if (!this._hasTouch && this.elRef.nativeElement.nodeName.toLowerCase() == "img") {
             this.renderer.listen(this.elRef.nativeElement, 'mousedown', () => {
@@ -183,7 +186,13 @@ export class PipDragDirective implements OnInit, AfterViewInit, OnDestroy {
             document.addEventListener(this._moveEvents, () => {
                 this.cancelPress();
             });
+            document.addEventListener(this._touchMoveEvent, () => {
+                this.cancelPress();
+            });
             document.addEventListener(this._releaseEvents, () => {
+                this.cancelPress();
+            });
+            document.addEventListener(this._touchReleaseEvents, () => {
                 this.cancelPress();
             });
         } else {

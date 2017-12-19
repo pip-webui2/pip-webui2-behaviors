@@ -14,9 +14,6 @@ export class PipDropDirective implements OnInit, AfterViewInit, OnDestroy {
         this._dropEnabled = enable;
     }
     @Output() dropSuccess: EventEmitter<any> = new EventEmitter<any>();
-    // @Output() dragStart: EventEmitter<any> = new EventEmitter<any>();
-    // @Output() dragStop: EventEmitter<any> = new EventEmitter<any>();
-    // @Output() dragMove: EventEmitter<any> = new EventEmitter<any>();
     @Output() enter: EventEmitter<any> = new EventEmitter<any>();
     @Output() leave: EventEmitter<any> = new EventEmitter<any>();
     @Output() diactive: EventEmitter<any> = new EventEmitter<any>();
@@ -70,29 +67,11 @@ export class PipDropDirective implements OnInit, AfterViewInit, OnDestroy {
     private onDragStart(evt, obj) {
         if (!this._dropEnabled) return;
         this.isTouching(obj.x, obj.y, obj.element, evt, obj);
-
-        // if (this.dragStart) {
-        //     setTimeout(() => {
-        //         this.dragStart.emit({
-        //             data: obj.data,
-        //             event: obj
-        //         });
-        //     }, 0);
-        // }
     }
 
     private onDragMove(evt, obj) {
         if (!this._dropEnabled) return;
         this.isTouching(obj.x, obj.y, obj.element, evt, obj);
-
-        // if (this.dragMove) {
-        //     setTimeout(() => {
-        //         this.dragMove.emit({
-        //             data: obj.data,
-        //             event: obj
-        //         });
-        //     }, 0);
-        // }
     }
 
     private onDragEnd(evt, obj) {
@@ -129,15 +108,6 @@ export class PipDropDirective implements OnInit, AfterViewInit, OnDestroy {
                 }, 0);
             }
         }
-
-        // if (this.dragStop) {
-        //     setTimeout(() => {
-        //         this.dragStop.emit({
-        //             data: obj.data,
-        //             event: obj
-        //         });
-        //     }, 0);
-        // }
 
         this.updateDragStyles(false, obj.element);
     }
