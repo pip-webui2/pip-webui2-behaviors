@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import { Directive, ElementRef, OnInit, AfterViewInit, OnDestroy, Renderer, Host, Input, Output, EventEmitter } from '@angular/core';
+import { Directive, ElementRef, AfterViewInit, Renderer, Input, Output, EventEmitter } from '@angular/core';
 import { KEY_CODE } from '../shared/key-code.model';
 
 @Directive({

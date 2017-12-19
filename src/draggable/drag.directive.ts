@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import { Directive, ElementRef, OnInit, AfterViewInit, OnDestroy, Renderer, Host, Input, Output, EventEmitter } from '@angular/core';
+import { Directive, ElementRef, OnInit, AfterViewInit, OnDestroy, Renderer, Input, Output, EventEmitter } from '@angular/core';
 import { PipDraggableService } from './shared/draggable.service';
 
 @Directive({

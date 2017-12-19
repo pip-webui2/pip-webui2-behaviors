@@ -1,12 +1,8 @@
 import * as _ from 'lodash';
-import { Directive, ElementRef, OnInit, AfterViewInit, OnDestroy, Renderer, Host, Input, Output, EventEmitter } from '@angular/core';
+import { Directive, ElementRef, AfterViewInit, Renderer} from '@angular/core';
 
 @Directive({
     selector: '[pipDragCancel]',
-    /*host: {
-        '(click)': 'click()',
-        '(keypress)': 'keydown()'
-    }*/
 })
 export class PipDragCancelDirective implements AfterViewInit { 
     constructor(

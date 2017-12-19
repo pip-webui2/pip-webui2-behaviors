@@ -1,4 +1,4 @@
-import { Component, Input, Output, OnInit, AfterViewInit, EventEmitter, Renderer, ElementRef, HostListener } from '@angular/core';
+import { Component, Input, Output, OnInit, AfterViewInit, EventEmitter, Renderer, ElementRef } from '@angular/core';
 import { KEY_CODE } from '../shared/key-code.model';
 
 @Component({
