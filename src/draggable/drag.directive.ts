@@ -377,8 +377,8 @@ export class PipDragDirective implements OnInit, AfterViewInit, OnDestroy {
             scrollY = 0,
             offset = (element) => {
                 return {
-                    left: element.getBoundingClientRect().left || 0,
-                    top: element.getBoundingClientRect().top || 0
+                    left: element.getBoundingClientRect && element.getBoundingClientRect().left || 0,
+                    top: element.getBoundingClientRect && element.getBoundingClientRect().top || 0
                 };
             };
 
