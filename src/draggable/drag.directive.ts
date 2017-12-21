@@ -154,9 +154,15 @@ export class PipDragDirective implements OnInit, AfterViewInit, OnDestroy {
     }
 
     private isClickableElement(evt: any) {
-        return (
-            _.isUndefined(evt.target.attributes.getNamedItem("pip-cancel-drag") || evt.target.attributes.getNamedItem("pipCancelDrag"))
-        );
+        let element = evt.target;
+        let clickable = false;
+        do {
+            console.log('element', element);
+            clickable = !_.isNull(element.attributes.getNamedItem("pipdragcancel"));
+            element = element.parentNode;
+        } while (element !== this.elRef.nativeElement && !clickable)
+
+        return clickable;
     }
 
     /*
