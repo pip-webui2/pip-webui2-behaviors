@@ -1,7 +1,7 @@
 <p>
     <strong>Selected</strong> - {{ 'EXAMPLES.SELECTED_DESCRIPTION' | translate }}.
 </p>
-<pip-selected (onSelect)="onSelect($event)">
+<pip-selected (onSelect)="selectedIndex = $event.index" [index]="selectedIndex">
     <mat-nav-list>
         <mat-divider></mat-divider>
         <mat-list-item *ngFor="let item of items" pipSelectable (keypress)="keypress()">

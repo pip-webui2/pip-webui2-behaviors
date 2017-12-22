@@ -74,7 +74,9 @@ export class SelectedExampleComponent {
 
   }
 
+  public selectedIndex: number = 4;
+
   public onSelect(event) {
-    //console.log('event', event);
+    console.log('event', event);
   }
 }

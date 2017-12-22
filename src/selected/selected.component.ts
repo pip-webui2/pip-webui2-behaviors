@@ -11,9 +11,13 @@ export class PipSelectedComponent implements OnInit, AfterViewInit {
     private _modifier: string = ':visible';
     private _prevItem: any = null;
 
-    @Input() public set index(index: number) {
+    @Input('index') set indexSetter(index: number) {
+        if (this._index == index) return;
+
         this._index = index;
-        // Add class to index
+        this.selectItem({
+            itemIndex: this._index
+        });
     }
 
     @Input() public set skipHidden(skip: boolean) {
@@ -72,9 +76,6 @@ export class PipSelectedComponent implements OnInit, AfterViewInit {
             item = () => {
                 if (itemParams.item) {
                     return itemParams.item;
-                }
-                if (itemIndex === undefined || itemIndex === -1) {
-                    //itemIndex = items.index(items.filter('[pip-id=' + itemId + ']'));
                 }
                 if (itemIndex >= 0 && itemIndex < itemsLength) {
                     return items[itemIndex];
