@@ -135,6 +135,16 @@ export class PipSelectedComponent implements OnInit, AfterViewInit {
         }
     }
 
+    public addItem() {
+        if (this._prevItem == null) {
+            setTimeout(() => {
+                this.selectItem({
+                    itemIndex: this._index
+                });
+            }, 100);
+        } 
+    }
+
     public onClickEvent = (element) => {
         this.selectItem({
             item: element,

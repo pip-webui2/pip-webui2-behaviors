@@ -21,6 +21,7 @@ export class PipSelectableDirective {
     constructor(private elRef: ElementRef, private renderer: Renderer, @Host() selected: PipSelectedComponent) {
         this.setClass();
         this.onClickEvent = selected.onClickEvent;
+        selected.addItem();
     }
 
     private setClass() {

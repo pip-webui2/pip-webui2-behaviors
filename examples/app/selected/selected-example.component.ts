@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import * as _ from 'lodash';
 
 @Component({
   selector: 'selected-example',
@@ -7,7 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./selected-example.component.scss']
 })
 export class SelectedExampleComponent {
-  public items: any[] = [{
+  public items: any[];
+  private _items: any[] = [{
     id: '1',
     title: "Banana",
   },
@@ -71,7 +72,9 @@ export class SelectedExampleComponent {
     title: "Radish",
   }]
   constructor() {
-
+    setTimeout(() => {
+      this.items = this._items;
+    }, 1000);
   }
 
   public selectedIndex: number = 4;
