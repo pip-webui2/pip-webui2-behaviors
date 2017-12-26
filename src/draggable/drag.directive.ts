@@ -340,7 +340,6 @@ export class PipDragDirective implements OnInit, AfterViewInit, OnDestroy {
             element.classList.remove('pip-drag-enter');
         });
 
-        this.reset();
         document.removeEventListener(this._moveEvents, this._moveListener);
         document.removeEventListener(this._releaseEvents, this._releaseListener);
         if (this.dragStop) {
@@ -349,6 +348,10 @@ export class PipDragDirective implements OnInit, AfterViewInit, OnDestroy {
                 $event: evt
             });
         }
+
+        setTimeout(() => {
+            this.reset();
+        });
     }
 
     private onDragComplete(evt) {

@@ -88,8 +88,8 @@ export class PipDropDirective implements OnInit, AfterViewInit, OnDestroy {
                 setTimeout(() => {
                     this.dropSuccess.emit({
                         data: obj.data,
-                        event: obj
-                        //$target: this.$scope.$eval(this.$scope.value)
+                        event: obj,
+                        target: this.elRef.nativeElement
                     });
                 }, 0);
             }
