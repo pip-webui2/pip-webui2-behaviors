@@ -18,6 +18,7 @@ export class PipDragDirective implements OnInit, AfterViewInit, OnDestroy {
     @Input() horizontalScroll: boolean;
     @Input() activationDistance: number = 75;
     @Input() set scrollContainer(container: string) {
+        if (!container) return;
         this._scrollContainer = document.querySelector(container);
     }
     @Input() public set drag(newVal: any) {
