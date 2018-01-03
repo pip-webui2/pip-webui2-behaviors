@@ -12,9 +12,9 @@ export class PipDragCancelDirective implements AfterViewInit {
 
     ngAfterViewInit() {
         let elements = this.elRef.nativeElement.getElementsByTagName('*');
-
+console.log();
         _.each(elements, (element) => {
-            this.renderer.setElementAttribute(element, 'pip-cancel-drag', 'pip-cancel-drag');
+            this.renderer.setElementAttribute(element, 'pip-drag-cancel', 'pip-drag-cancel');
         });
     }
 }
