@@ -1,4 +1,3 @@
-import * as _ from 'lodash';
 import { Directive, ElementRef, AfterViewInit, Renderer} from '@angular/core';
 
 @Directive({
@@ -12,9 +11,8 @@ export class PipDragCancelDirective implements AfterViewInit {
 
     ngAfterViewInit() {
         let elements = this.elRef.nativeElement.getElementsByTagName('*');
-console.log();
-        _.each(elements, (element) => {
-            this.renderer.setElementAttribute(element, 'pip-drag-cancel', 'pip-drag-cancel');
-        });
+        for (let i = 0; i < elements.length; i++) {
+            this.renderer.setElementAttribute(elements[i], 'pip-drag-cancel', 'pip-drag-cancel');
+        }
     }
 }

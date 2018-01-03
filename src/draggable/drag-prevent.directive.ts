@@ -1,4 +1,3 @@
-import * as _ from 'lodash';
 import { Directive, ElementRef, AfterViewInit, Renderer } from '@angular/core';
 
 @Directive({

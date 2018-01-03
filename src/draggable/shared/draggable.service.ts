@@ -1,4 +1,3 @@
-import * as _ from 'lodash';
 import { Injectable } from '@angular/core';
 import { DraggableListener } from './draggable-listener.model';
 
@@ -7,11 +6,11 @@ export class PipDraggableService {
     private _listeners: DraggableListener[] = [];
 
     public inputEvent(event) {
-        if (!_.isUndefined(event.touches)) {
+        if (event.touches != undefined) {
             return event.touches[0];
         }
     
-        else if (!_.isUndefined(event.originalEvent) && !_.isUndefined(event.originalEvent.touches)) {
+        else if (event.originalEvent != undefined && event.originalEvent.touches != undefined) {
             return event.originalEvent.touches[0];
         }
         return event;
@@ -19,7 +18,7 @@ export class PipDraggableService {
 
     public broadcast(eventName, obj) {
         let event = { name: eventName };
-        _.each(this._listeners, (listner: DraggableListener) => {
+        this._listeners.forEach((listner: DraggableListener) => {
             if (listner.eventName === eventName) listner.triggerFunction(event, obj);
         })
     }
@@ -32,7 +31,7 @@ export class PipDraggableService {
     }
 
     public off(id: string) {
-        let index = _.findIndex(this._listeners, (listener: DraggableListener) => {
+        let index = this._listeners.findIndex((listener: DraggableListener) => {
             return id === listener.id;
         });
 

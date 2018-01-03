@@ -1,4 +1,3 @@
-import * as _ from 'lodash';
 import { Directive, ElementRef, OnDestroy, Renderer, Input, Output, EventEmitter } from '@angular/core';
 import { KEY_CODE } from '../shared/key-code.model';
 
@@ -22,7 +21,7 @@ export class PipInfiniteScrollDirective implements OnDestroy {
         this.handleScrollUseDocumentBottom(use);
     }
 
-    @Output() onInfiniteScroll: EventEmitter<any> = new EventEmitter<any>(); 
+    @Output() onInfiniteScroll: EventEmitter<any> = new EventEmitter<any>();
 
     private THROTTLE_MILLISECONDS: number = 500;
     private checkWhenEnabled: any = null;
@@ -40,7 +39,7 @@ export class PipInfiniteScrollDirective implements OnDestroy {
         private renderer: Renderer
     ) {
         this.windowElement = window;
-        this.onContainerScrollThrottle = _.throttle(() => {
+        this.onContainerScrollThrottle = this.throttle(() => {
             this.onContainerScroll();
         }, this.THROTTLE_MILLISECONDS);
 
@@ -100,13 +99,13 @@ export class PipInfiniteScrollDirective implements OnDestroy {
         }
 
         if (this.useDocumentBottom) {
-            elementBottom = this.height((this.elRef.nativeElement[0].ownerDocument || ( < any > this.elRef.nativeElement[0]).document).documentElement);
+            elementBottom = this.height((this.elRef.nativeElement[0].ownerDocument || (<any>this.elRef.nativeElement[0]).document).documentElement);
         }
 
         remaining = elementBottom - containerBottom;
         result = this.height(this._scrollContainer) * this._scrollDistance + 1;
         shouldScroll = remaining <= result;
-        
+
         if (shouldScroll) {
             this.checkWhenEnabled = true;
             if (this.scrollEnabled) {
@@ -146,6 +145,36 @@ export class PipInfiniteScrollDirective implements OnDestroy {
                 this.onContainerScrollThrottle();
             });
         }
+    }
+
+    private throttle(func, ms) {
+
+        var isThrottled = false,
+            savedArgs,
+            savedThis;
+
+        function wrapper() {
+
+            if (isThrottled) { // (2)
+                savedArgs = arguments;
+                savedThis = this;
+                return;
+            }
+
+            func.apply(this, arguments); // (1)
+
+            isThrottled = true;
+
+            setTimeout(() => {
+                isThrottled = false; // (3)
+                if (savedArgs) {
+                    wrapper.apply(savedThis, savedArgs);
+                    savedArgs = savedThis = null;
+                }
+            }, ms);
+        }
+
+        return wrapper;
     }
 
 }

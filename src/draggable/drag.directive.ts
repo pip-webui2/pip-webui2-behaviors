@@ -1,4 +1,3 @@
-import * as _ from 'lodash';
 import { Directive, ElementRef, OnInit, AfterViewInit, OnDestroy, Renderer, Input, Output, EventEmitter } from '@angular/core';
 import { PipDraggableService } from './shared/draggable.service';
 
@@ -150,7 +149,7 @@ export class PipDragDirective implements OnInit, AfterViewInit, OnDestroy {
     }
 
     private onCenterAnchor(newVal, oldVal) {
-        if (!_.isUndefined(newVal))
+        if (newVal != undefined)
             this._centerAnchor = (newVal || 'true');
     }
 
@@ -332,9 +331,9 @@ export class PipDragDirective implements OnInit, AfterViewInit, OnDestroy {
         });
         this.elRef.nativeElement.classList.remove('pip-dragging');
         let dragEnterElemets = this.elRef.nativeElement.parentElement.getElementsByClassName('pip-drag-enter');
-        _.each(dragEnterElemets, (element: HTMLElement) => {
-            element.classList.remove('pip-drag-enter');
-        });
+        for (let i = 0; i < dragEnterElemets.length; i++) {
+            dragEnterElemets[i].classList.remove('pip-drag-enter');
+        }
 
         document.removeEventListener(this._moveEvents, this._moveListener);
         document.removeEventListener(this._releaseEvents, this._releaseListener);

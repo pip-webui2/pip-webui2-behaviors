@@ -1,4 +1,3 @@
-import * as _ from 'lodash';
 import { Directive, ElementRef, AfterViewInit, Renderer, Input, Output, EventEmitter } from '@angular/core';
 import { KEY_CODE } from '../shared/key-code.model';
 
@@ -81,7 +80,8 @@ export class PipFocusedDirective implements AfterViewInit {
         this.controlsLength = this.controls.length;
         this.checkTabindex(this.controls);
         // Add event listeners
-        _.each(this.controls, (element: HTMLElement) => {
+        for (let i = 0; i < this.controlsLength; i++) {
+            let element = this.controls[i];
             element.addEventListener('focus', (event) => {
                 const target = event.currentTarget;
                 if (element.classList.contains('mat-focused')) {
@@ -119,8 +119,7 @@ export class PipFocusedDirective implements AfterViewInit {
                     if (this.focusedOpacityClass) element.classList.remove(this.focusedOpacityClass);
                 }
             })
-        });
-
+        }
     }
 
     ngAfterViewInit() {
@@ -159,9 +158,14 @@ export class PipFocusedDirective implements AfterViewInit {
     }
 
     private checkTabindex(controls) {
-        const index = _.findIndex(controls, (c) => {
-            return c['tabindex'] > -1;
-        });
+        let index = -1;
+        for (let i = 0; i < controls.length; i++) {
+            let c = controls[i];
+            if (c['tabindex'] > -1) {
+                index = i;
+                return;
+            }
+        }
 
         if (index == -1 && controls.length > 0 && this._focusedTabindex) {
             this.setTabindex(controls[0], this._focusedTabindex);
@@ -195,7 +199,7 @@ export class PipFocusedDirective implements AfterViewInit {
                 this.setControls();
                 if (index < this.controls.length) this.controls[index].focus();
                 else if (this.controls.length > 0) {
-                    while(index >= this.controls.length && index > -1) index--;
+                    while (index >= this.controls.length && index > -1) index--;
                     this.controls[index].focus();
                 }
             }, 200);
