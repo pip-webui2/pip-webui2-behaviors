@@ -8,7 +8,7 @@ Pip.WebUI.Behaviors module contains behaviors that can be attached to existing c
 
 **Using** 
 
-To color div with orange color by pressing arrow buttons
+To make the div orange by pressing arrow buttons
 
 ```html
 <div pipFocused focusedColor="orange">
