@@ -4,7 +4,9 @@
 
 Pip.WebUI.Behaviors module contains behaviors that can be attached to existing controls or pages
 
-### Focusable - allows to navigate over focusable controls using arrow keys.
+### Focusable
+
+**Allows to navigate over focusable controls using arrow keys**
 
 **Using** 
 
@@ -27,7 +29,9 @@ To make the div orange by pressing arrow buttons
 </a>
 
 
-### Selectable - allows to navigate over non-focuseable elements using arrow keys
+### Selectable
+
+**Allows to navigate over non-focuseable elements using arrow keys**
 
 **Using**
 
@@ -47,7 +51,9 @@ To make the div orange by pressing arrow buttons
     <img style="max-width: 300px" src="https://github.com/pip-webui2/pip-webui2-behaviors/raw/master/doc/images/selected.png"/>
 </a>
 
-### Draggable - implements drag & drop functionality
+### Draggable
+
+**Implements drag & drop functionality**
 
 **Using**
 
@@ -120,7 +126,9 @@ Styles:
     <img style="max-width: 300px" src="https://github.com/pip-webui2/pip-webui2-behaviors/raw/master/doc/images/draggable.png"/>
 </a>
 
-### Infinite Scroll - allows to upload data in chunks while user is scrolling
+### Infinite Scroll
+
+**Allows to upload data in chunks while user is scrolling**
 
 **Using**
 
