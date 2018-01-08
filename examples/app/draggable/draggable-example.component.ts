@@ -89,8 +89,5 @@ export class DraggableExampleComponent {
     this.content.splice(otherIndex, 1);
     if (index > otherIndex) this.content.splice(index, 0, event.data);
     else this.content.splice(index + 1, 0, event.data);
-
-    //this.content.splice(this.virtualElementIndex, 1);
-    //this.virtualElementIndex = null;
   }
 }
