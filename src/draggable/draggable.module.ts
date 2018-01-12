@@ -14,7 +14,7 @@ import { PipDragPreventDirective } from './drag-prevent.directive';
     PipDragDirective,
     PipDropDirective,
     PipDragCancelDirective,
-    PipDragCancelDirective
+    PipDragPreventDirective
   ],
   imports: [
     BrowserModule,
@@ -25,7 +25,7 @@ import { PipDragPreventDirective } from './drag-prevent.directive';
     PipDragDirective,
     PipDropDirective,
     PipDragCancelDirective,
-    PipDragCancelDirective
+    PipDragPreventDirective
   ],
   providers: [
     PipDraggableService
