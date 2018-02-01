@@ -7,6 +7,8 @@
     $primary: map-get($theme, primary);
      :host {
         /deep/ .pip-selectable {
+            width: 100%;
+            max-width: 100%;
             &.pip-selected-item {
                 border-left: 3px solid mat-color($primary);
                 .mat-list-item-content {
