@@ -1,5 +1,6 @@
 import { Component, Input, Output, OnInit, AfterViewInit, EventEmitter, Renderer, ElementRef } from '@angular/core';
 import { KEY_CODE } from '../shared/key-code.model';
+import * as _ from "lodash";
 
 @Component({
     selector: 'pip-selected',
@@ -10,6 +11,7 @@ export class PipSelectedComponent implements OnInit, AfterViewInit {
     private _index: number = 0;
     private _modifier: string = ':visible';
     private _prevItem: any = null;
+    private timer: any = null;
 
     @Input('index') set indexSetter(index: number) {
         if (this._index == index) return;
@@ -31,6 +33,8 @@ export class PipSelectedComponent implements OnInit, AfterViewInit {
 
     ngOnInit() { }
 
+    private add: Function;
+
     constructor(
         private renderer: Renderer,
         private elRef: ElementRef
@@ -44,6 +48,12 @@ export class PipSelectedComponent implements OnInit, AfterViewInit {
         renderer.listen(elRef.nativeElement, 'keydown', (event) => {
             this.onKeyDown(event);
         });
+
+        this.add = _.debounce(() => {
+            this.selectItem({
+                itemIndex: this._index
+            });
+        }, 10);    
     }
 
     ngAfterViewInit() {
@@ -136,13 +146,7 @@ export class PipSelectedComponent implements OnInit, AfterViewInit {
     }
 
     public addItem() {
-        if (this._prevItem == null) {
-            setTimeout(() => {
-                this.selectItem({
-                    itemIndex: this._index
-                });
-            }, 100);
-        } 
+        this.add();
     }
 
     public onClickEvent = (element) => {
