@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 import { MatButtonModule, MatIconModule } from '@angular/material';
 
 import { PipSelectedComponent } from './selected.component';
@@ -12,7 +12,7 @@ import { PipSelectableDirective } from './selectable.directive';
     PipSelectableDirective
   ],
   imports: [
-    BrowserModule,
+    CommonModule,
     MatButtonModule,
     MatIconModule
   ],

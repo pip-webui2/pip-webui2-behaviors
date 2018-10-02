@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 import { MatButtonModule, MatIconModule } from '@angular/material';
 
 import { PipInfiniteScrollDirective } from './infinite-scroll.directive';
@@ -10,7 +10,7 @@ import { PipInfiniteScrollDirective } from './infinite-scroll.directive';
     PipInfiniteScrollDirective
   ],
   imports: [
-    BrowserModule,
+    CommonModule,
     MatButtonModule,
     MatIconModule
   ],

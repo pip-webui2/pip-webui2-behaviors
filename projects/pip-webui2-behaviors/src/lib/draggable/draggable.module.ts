@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 import { MatButtonModule, MatIconModule } from '@angular/material';
 
 import { PipDraggableService } from './shared/draggable.service';
@@ -17,7 +17,7 @@ import { PipDragPreventDirective } from './drag-prevent.directive';
     PipDragPreventDirective
   ],
   imports: [
-    BrowserModule,
+    CommonModule,
     MatButtonModule,
     MatIconModule
   ],
