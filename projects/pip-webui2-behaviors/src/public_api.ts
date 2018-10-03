@@ -2,7 +2,7 @@
  * Public API Surface of pip-webui2-behaviors
  */
 
-export * from './lib/selected';
-export * from './lib/focused';
-export * from './lib/draggable';
-export * from './lib/infinite-scroll';
+export * from './lib/selected/index';
+export * from './lib/focused/index';
+export * from './lib/draggable/index';
+export * from './lib/infinite-scroll/index';

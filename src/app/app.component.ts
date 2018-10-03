@@ -60,7 +60,7 @@ export class AppComponent implements OnInit {
   public selectedTheme: Theme;
   public activeMediaQuery: boolean;
   public mode: string;
-  public app = 'Controls';
+  public app = 'Behaviors';
   public url: string;
   public langs: string[] = [];
   public selectedLang = 'en';
