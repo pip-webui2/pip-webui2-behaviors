@@ -2,7 +2,7 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { MatSidenav } from '@angular/material';
 import { ObservableMedia, MediaChange } from '@angular/flex-layout';
-import { PipThemesService, Theme } from 'pip-webui2-themes-temp';
+import { PipThemesService, Theme } from 'pip-webui2-themes';
 import { TranslateService } from '@ngx-translate/core';
 
 import { AppTranslations } from './app.strings';

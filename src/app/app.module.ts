@@ -5,7 +5,7 @@ import { FlexLayoutModule, BREAKPOINTS, DEFAULT_BREAKPOINTS } from '@angular/fle
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule, MatIconModule, MatMenuModule, MatSelectModule, MatSidenavModule, MatToolbarModule } from '@angular/material';
 import { TranslateModule } from '@ngx-translate/core';
-import { PipThemesModule } from 'pip-webui2-themes-temp';
+import { PipThemesModule } from 'pip-webui2-themes';
 
 import { AppRoutingModule } from './app-routing.module';
 import { DraggableExampleModule } from './draggable-example/draggable-example.module';

@@ -1,6 +1,6 @@
 import { Component, Input, Output, OnInit, AfterViewInit, EventEmitter, Renderer, ElementRef } from '@angular/core';
-import { KeyCode } from '../shared/key-code.model';
 import { debounce } from 'lodash';
+import { KeyCode } from '../shared/key-code.model';
 
 @Component({
     selector: 'pip-selected',
