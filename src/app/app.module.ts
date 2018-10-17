@@ -12,6 +12,7 @@ import { DraggableExampleModule } from './draggable-example/draggable-example.mo
 import { ExamplesListModule } from './examples-list/examples-list.module';
 import { FocusedExampleModule } from './focused-example/focused-example.module';
 import { InfiniteScrollExampleModule } from './infinite-scroll-example/infinite-scroll-example.module';
+import { InfiniteScrollPageExampleModule } from './infinite-scroll-page-example/infinite-scroll-page-example.module';
 import { SelectedExampleModule } from './selected-example/selected-example.module';
 
 import { AppComponent } from './app.component';
@@ -47,6 +48,7 @@ export const CustomBreakPointsProvider = {
     SelectedExampleModule,
     FocusedExampleModule,
     InfiniteScrollExampleModule,
+    InfiniteScrollPageExampleModule,
     DraggableExampleModule,
   ],
   providers: [CustomBreakPointsProvider],

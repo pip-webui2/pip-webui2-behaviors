@@ -35,7 +35,7 @@
     <examples-list *ngIf="!activeMediaQuery" class="mat-elevation-z6 nav" [list]="list" [selectedItemIndex]="listIndex"
                    (selectedItemIndexChange)="onListItemIndexChanged($event)">
     </examples-list>
-    <div fxFlex="grow" style="width: calc(100% - 300px); overflow: auto">
+    <div id="content" fxFlex="grow" style="width: calc(100% - 300px); overflow: auto">
       <mat-toolbar color="primary" *ngIf="list[listIndex]">
         <span fxLayout="row" fxLayoutAlign="start center" fxFlex="grow">
           {{list[listIndex].name}}

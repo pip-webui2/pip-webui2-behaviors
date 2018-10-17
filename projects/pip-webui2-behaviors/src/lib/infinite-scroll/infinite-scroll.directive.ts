@@ -7,6 +7,12 @@ export class PipInfiniteScrollDirective implements OnDestroy {
     @Input() set scrollParent(parent: boolean) {
         this.changeContainer(parent ? this.elRef.nativeElement.parentElement : this.elRef.nativeElement);
     }
+    @Input() set scrollContainer(elSelector: string) {
+        const el = this.documentElement.querySelector(elSelector);
+        if (el) {
+            this.changeContainer(el);
+        }
+    }
     @Input() set immediateCheck(check: any) {
         if (check) { this.onContainerScrollThrottle(); }
     }
@@ -31,6 +37,7 @@ export class PipInfiniteScrollDirective implements OnDestroy {
     private scrollEnabled = true;
     private unregisterEventListener: Function = null;
     private _useDocumentBottom = false;
+    private documentElement: HTMLElement | Document = null;
     private windowElement: HTMLElement | Window = null;
     private onContainerScrollThrottle: Function;
 
@@ -38,6 +45,7 @@ export class PipInfiniteScrollDirective implements OnDestroy {
         private elRef: ElementRef,
         private renderer: Renderer
     ) {
+        this.documentElement = document;
         this.windowElement = window;
         this.onContainerScrollThrottle = this.throttle(() => {
             this.onContainerScroll();

@@ -31,6 +31,11 @@ export class AppComponent implements OnInit {
       route: 'infinite_scroll'
     },
     {
+      name: 'Infinite page',
+      id: 'infinite-scroll-page',
+      route: 'infinite_page'
+    },
+    {
       name: 'Draggable',
       id: 'draggable',
       route: 'draggable'
