@@ -1,27 +1,54 @@
 import { TestBed, async } from '@angular/core/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule, MatIconModule, MatMenuModule, MatSelectModule, MatSidenavModule, MatToolbarModule } from '@angular/material';
+import { TranslateModule } from '@ngx-translate/core';
+import { PipThemesModule } from 'pip-webui2-themes';
+
 import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
+import { DraggableExampleModule } from './draggable-example/draggable-example.module';
+import { ExamplesListModule } from './examples-list/examples-list.module';
+import { FocusedExampleModule } from './focused-example/focused-example.module';
+import { InfiniteScrollExampleModule } from './infinite-scroll-example/infinite-scroll-example.module';
+import { InfiniteScrollPageExampleModule } from './infinite-scroll-page-example/infinite-scroll-page-example.module';
+import { SelectedExampleModule } from './selected-example/selected-example.module';
+
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
         AppComponent
       ],
+      imports: [
+        NoopAnimationsModule,
+        FlexLayoutModule,
+        FormsModule,
+        MatButtonModule,
+        MatIconModule,
+        MatMenuModule,
+        MatSelectModule,
+        MatSidenavModule,
+        MatToolbarModule,
+
+        TranslateModule.forRoot(),
+
+        PipThemesModule,
+
+        AppRoutingModule,
+        ExamplesListModule,
+        SelectedExampleModule,
+        FocusedExampleModule,
+        InfiniteScrollExampleModule,
+        InfiniteScrollPageExampleModule,
+        DraggableExampleModule,
+      ]
     }).compileComponents();
   }));
   it('should create the app', async(() => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
-  }));
-  it(`should have as title 'pip-webui2-behaviors-app'`, async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('pip-webui2-behaviors-app');
-  }));
-  it('should render title in a h1 tag', async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to pip-webui2-behaviors-app!');
   }));
 });

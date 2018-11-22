@@ -17,12 +17,6 @@ import { SelectedExampleModule } from './selected-example/selected-example.modul
 
 import { AppComponent } from './app.component';
 
-export const CustomBreakPointsProvider = {
-  provide: BREAKPOINTS,
-  useValue: [...DEFAULT_BREAKPOINTS],
-  multi: true
-};
-
 @NgModule({
   declarations: [
     AppComponent
@@ -51,7 +45,7 @@ export const CustomBreakPointsProvider = {
     InfiniteScrollPageExampleModule,
     DraggableExampleModule,
   ],
-  providers: [CustomBreakPointsProvider],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

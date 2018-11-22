@@ -1,4 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { CommonModule } from '@angular/common';
+import { MatListModule } from '@angular/material';
+import { TranslateModule } from '@ngx-translate/core';
+import { PipSelectedModule } from 'pip-webui2-behaviors';
 
 import { SelectedExampleComponent } from './selected-example.component';
 
@@ -8,9 +12,16 @@ describe('SelectedExampleComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SelectedExampleComponent ]
+      declarations: [SelectedExampleComponent],
+      imports: [
+        CommonModule,
+        MatListModule,
+        TranslateModule.forRoot(),
+
+        PipSelectedModule
+      ],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

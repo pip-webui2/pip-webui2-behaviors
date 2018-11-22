@@ -10,7 +10,7 @@ import { DraggableExampleComponent } from './draggable-example.component';
   imports: [
     CommonModule,
     MatCardModule,
-    TranslateModule,
+    TranslateModule.forChild(),
 
     PipDraggableModule
   ],

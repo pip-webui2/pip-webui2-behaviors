@@ -47,3 +47,21 @@ No breaking changes in this version
 
 #### Bug Fixes
 * infinite scroll now could be applied to whole page
+
+## <a name="1.1.0"></a> 1.1.0 (2018-11-22)
+
+Update to stable Angular 7 and fix the tests.
+
+#### Features
+* **draggable** Draggable behavior
+* **focused** Focused behavior
+* **selected** Selected behavior
+* **infinite** Infinite Scroll behavior
+
+#### Breaking Changes
+No breaking changes in this version
+
+#### Bug Fixes
+* Library tests works now. Run `npm run test:lib` to check it out;
+* Example tests works now. Run `npm run test` to check it out;
+* E2E tests works too. Run `npm run e2e` to check it out.

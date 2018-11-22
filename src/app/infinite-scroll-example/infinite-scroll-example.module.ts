@@ -10,7 +10,7 @@ import { InfiniteScrollExampleComponent } from './infinite-scroll-example.compon
   imports: [
     CommonModule,
     MatCardModule,
-    TranslateModule,
+    TranslateModule.forChild(),
 
     PipInfiniteScrollModule
   ],

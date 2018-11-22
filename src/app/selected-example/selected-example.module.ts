@@ -10,7 +10,7 @@ import { SelectedExampleComponent } from './selected-example.component';
   imports: [
     CommonModule,
     MatListModule,
-    TranslateModule,
+    TranslateModule.forChild(),
 
     PipSelectedModule
   ],

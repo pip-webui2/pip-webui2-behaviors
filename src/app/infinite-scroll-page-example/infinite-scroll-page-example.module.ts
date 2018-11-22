@@ -10,7 +10,7 @@ import { InfiniteScrollPageExampleComponent } from './infinite-scroll-page-examp
   imports: [
     CommonModule,
     MatCardModule,
-    TranslateModule,
+    TranslateModule.forChild(),
 
     PipInfiniteScrollModule
   ],

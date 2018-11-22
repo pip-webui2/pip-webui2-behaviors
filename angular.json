@@ -72,7 +72,7 @@
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
             "styles": [
-              "src/styles.css"
+              "src/styles.scss"
             ],
             "scripts": [],
             "assets": [
@@ -140,7 +140,8 @@
           "options": {
             "main": "projects/pip-webui2-behaviors/src/test.ts",
             "tsConfig": "projects/pip-webui2-behaviors/tsconfig.spec.json",
-            "karmaConfig": "projects/pip-webui2-behaviors/karma.conf.js"
+            "karmaConfig": "projects/pip-webui2-behaviors/karma.conf.js",
+            "codeCoverage": true
           }
         },
         "lint": {

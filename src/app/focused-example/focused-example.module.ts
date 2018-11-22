@@ -15,7 +15,7 @@ import { FocusedExampleComponent } from './focused-example.component';
     MatToolbarModule,
     MatCardModule,
     MatIconModule,
-    TranslateModule,
+    TranslateModule.forChild(),
 
     PipFocusedModule
   ],
