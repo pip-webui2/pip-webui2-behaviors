@@ -65,3 +65,19 @@ No breaking changes in this version
 * Library tests works now. Run `npm run test:lib` to check it out;
 * Example tests works now. Run `npm run test` to check it out;
 * E2E tests works too. Run `npm run e2e` to check it out.
+
+## <a name="1.1.1"></a> 1.1.1 (2018-12-04)
+
+Angular 7 minor updates and example fix for new Themes version.
+
+#### Features
+* **draggable** Draggable behavior
+* **focused** Focused behavior
+* **selected** Selected behavior
+* **infinite** Infinite Scroll behavior
+
+#### Breaking Changes
+No breaking changes in this version
+
+#### Bug Fixes
+No fixes in this version
