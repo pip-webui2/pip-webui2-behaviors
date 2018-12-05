@@ -34,7 +34,7 @@ describe('AppComponent', () => {
 
         TranslateModule.forRoot(),
 
-        PipThemesModule,
+        PipThemesModule.forRoot(),
 
         AppRoutingModule,
         ExamplesListModule,
