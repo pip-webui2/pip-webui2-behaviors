@@ -113,3 +113,19 @@ No breaking changes in this version
 
 #### Bug Fixes
 No fixes in this version
+
+## <a name="1.1.4"></a> 1.1.4 (2019-01-06)
+
+`candy-app` theme fix rebuild
+
+#### Features
+* **draggable** Draggable behavior
+* **focused** Focused behavior
+* **selected** Selected behavior
+* **infinite** Infinite Scroll behavior
+
+#### Breaking Changes
+No breaking changes in this version
+
+#### Bug Fixes
+No fixes in this version
