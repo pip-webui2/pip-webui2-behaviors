@@ -97,3 +97,19 @@ No breaking changes in this version
 
 #### Bug Fixes
 No fixes in this version
+
+## <a name="1.1.3"></a> 1.1.3 (2019-01-06)
+
+Dependencies
+
+#### Features
+* **draggable** Draggable behavior
+* **focused** Focused behavior
+* **selected** Selected behavior
+* **infinite** Infinite Scroll behavior
+
+#### Breaking Changes
+No breaking changes in this version
+
+#### Bug Fixes
+No fixes in this version
