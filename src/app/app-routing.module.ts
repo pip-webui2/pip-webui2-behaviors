@@ -13,7 +13,7 @@ const appRoutes: Routes = [
     { path: 'infinite_scroll', component: InfiniteScrollExampleComponent },
     { path: 'infinite_page', component: InfiniteScrollPageExampleComponent },
     { path: 'draggable', component: DraggableExampleComponent },
-    { path: '', pathMatch: 'full', redirectTo: 'selected' }
+    { path: '**', redirectTo: 'selected' },
 ];
 
 @NgModule({
