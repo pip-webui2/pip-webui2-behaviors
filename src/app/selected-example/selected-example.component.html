@@ -7,7 +7,7 @@
   {{ 'EXAMPLES.SELECTED.DISABLED' | translate }}
 </mat-checkbox>
 </p>
-<pip-selected (onSelect)="selectedIndex = $event.index" [index]="selectedIndex" [disableSelect]="selectDisable">
+<pip-selected (onSelect)="onSelect($event)" [index]="selectedIndex" [disableSelect]="selectDisable">
   <mat-nav-list>
     <mat-divider></mat-divider>
     <mat-list-item *ngFor="let item of items" pipSelectable (keypress)="keypress()">

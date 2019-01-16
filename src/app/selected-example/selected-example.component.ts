@@ -79,8 +79,8 @@ export class SelectedExampleComponent {
 
   public selectedIndex = 4;
 
-  public onSelect(event) {
-    console.log('event', event);
+  public onSelect($event) {
+    if ($event) this.selectedIndex = $event.index
   }
 
 }
