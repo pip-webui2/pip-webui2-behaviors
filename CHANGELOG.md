@@ -161,3 +161,20 @@ No breaking changes in this version
 
 #### Bug Fixes
 * Added style fix for selected item and border
+
+
+## <a name="1.1.7"></a> 1.1.7 (2019-01-16)
+
+`pip-selected` Could be disabled now
+
+#### Features
+* **draggable** Draggable behavior
+* **focused** Focused behavior
+* **selected** Selected behavior
+* **infinite** Infinite Scroll behavior
+
+#### Breaking Changes
+No breaking changes in this version
+
+#### Bug Fixes
+No fixes in this version

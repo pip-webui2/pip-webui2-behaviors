@@ -1,7 +1,7 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { MatSidenav } from '@angular/material';
-import { ObservableMedia, MediaChange } from '@angular/flex-layout';
+import { MediaObserver, MediaChange } from '@angular/flex-layout';
 import { PipThemesService, Theme } from 'pip-webui2-themes';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -74,7 +74,7 @@ export class AppComponent implements OnInit {
   public constructor(
     private location: Location,
     private service: PipThemesService,
-    public media: ObservableMedia,
+    public media: MediaObserver,
     private translate: TranslateService
   ) {
 
@@ -87,7 +87,7 @@ export class AppComponent implements OnInit {
     this.translate.setTranslation('en', AppTranslations.en, true);
     this.translate.setTranslation('ru', AppTranslations.ru, true);
 
-    media.subscribe((change: MediaChange) => {
+    media.media$.subscribe((change: MediaChange) => {
       this.activeMediaQuery = change && change.mqAlias === 'xs' ? true : false;
       this.mode = change && change.mqAlias === 'xs' ? null : 'side';
     });

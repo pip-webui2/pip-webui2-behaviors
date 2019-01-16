@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./selected-example.component.scss']
 })
 export class SelectedExampleComponent {
-
+  public selectDisable = false;
   public items: any[];
   private _items: any[] = [{
     id: '1',

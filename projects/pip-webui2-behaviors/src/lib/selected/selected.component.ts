@@ -48,6 +48,7 @@ export class PipSelectedComponent implements OnInit, AfterViewInit {
     private timer: any = null;
     @Input() public itemClass = 'pip-selectable';
     @Input() public selectedItemClass = 'pip-selected-item';
+    @Input() public disableSelect: boolean = false;
 
     // tslint:disable-next-line:no-output-on-prefix
     @Output() onSelect: EventEmitter<any> = new EventEmitter<any>();
@@ -81,6 +82,8 @@ export class PipSelectedComponent implements OnInit, AfterViewInit {
     }
 
     private selectItem(itemParams: any) {
+        if (this.disableSelect) return;
+
         const itemIndex = itemParams.itemIndex,
             itemId = itemParams.itemId,
             items: HTMLCollection = itemParams.items || this.getElements(),
@@ -152,6 +155,8 @@ export class PipSelectedComponent implements OnInit, AfterViewInit {
     }
 
     public onClickEvent = (element) => {
+        if (this.disableSelect) return;
+
         this.selectItem({
             item: element,
             raiseEvent: true
@@ -159,6 +164,8 @@ export class PipSelectedComponent implements OnInit, AfterViewInit {
     }
 
     private onKeyDown(event) {
+        if (this.disableSelect) return;
+        
         const keyCode = event.which || event.keyCode;
         // Check control keyCode
         if (keyCode === KeyCode.ENTER || keyCode === KeyCode.SPACE) {
