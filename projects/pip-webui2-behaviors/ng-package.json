@@ -5,7 +5,7 @@
     "entryFile": "src/public_api.ts",
     "umdModuleIds": {
       "lodash": "^4.17.11",
-      "pip-webui2-themes": "^1.1.8"
+      "pip-webui2-themes": "^1.1.10"
     }
   },
   "whitelistedNonPeerDependencies": [
