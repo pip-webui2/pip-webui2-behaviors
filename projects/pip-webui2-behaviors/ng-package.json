@@ -5,11 +5,13 @@
     "entryFile": "src/public_api.ts",
     "umdModuleIds": {
       "lodash": "^4.17.11",
+      "mousetrap": "^1.6.3",
       "pip-webui2-themes": "^1.1.10"
     }
   },
   "whitelistedNonPeerDependencies": [
     "lodash",
+    "mousetrap",
     "^pip-webui2"
   ]
 }

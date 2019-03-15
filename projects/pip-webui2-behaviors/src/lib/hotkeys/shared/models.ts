@@ -11,7 +11,6 @@ export class HotkeyOptions {
     Propagate: boolean;
     DisableInInput: boolean;
     Target: any; // Event target object
-    Keycode: number;
 }
 
 export class HotkeyItem {
@@ -22,7 +21,7 @@ export class HotkeyItem {
     // Target element by Id
     public targetId?: string;
     // Access function
-    public access?: (event?: KeyboardEvent) => boolean;
+    public access?: (event?: ExtendedKeyboardEvent) => boolean;
     // Window.location.href
     public href?: string;
     // router.navigate(command, extras)
@@ -30,7 +29,7 @@ export class HotkeyItem {
     // Parameters router.navigate(command, extras)
     public navigationExtras?: NavigationExtras;
     // Click callback
-    public action?: (event?: KeyboardEvent) => void;
+    public action?: (event?: ExtendedKeyboardEvent) => void;
     // Default options
     public options?: HotkeyOptions;
 }

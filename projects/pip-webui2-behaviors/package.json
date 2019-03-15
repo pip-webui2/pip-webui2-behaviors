@@ -1,6 +1,6 @@
 {
   "name": "pip-webui2-behaviors",
-  "version": "1.1.11",
+  "version": "1.1.12",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "lodash": "^4.17.11",
+    "mousetrap": "^1.6.3",
     "pip-webui2-themes": "^1.1.10"
   },
   "peerDependencies": {

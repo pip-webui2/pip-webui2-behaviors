@@ -42,11 +42,6 @@ export class AppComponent implements OnInit {
       route: 'draggable'
     },
     {
-      name: 'Shortcuts',
-      id: 'shortcuts',
-      route: 'shortcuts'
-    },
-    {
       name: 'Hotkeys',
       id: 'hotkeys',
       route: 'hotkeys'
@@ -107,12 +102,15 @@ export class AppComponent implements OnInit {
     });
 
     this.pipHotkeys.add({
-      hotkey: 'alt+g',
-      action: () => { alert('Defaul global alt+g'); }
+      hotkey: 'ctrl+alt+l',
+      action: () => {
+        this.selectedLang = this.selectedLang === 'en' ? 'ru' : 'en';
+        this.translate.use(this.selectedLang);
+      }
     });
     this.pipHotkeys.add({
-      hotkey: 'alt+.',
-      action: () => { alert('Global alt+.'); }
+      hotkey: 'ctrl+alt+f',
+      navigationCommand: ['focused']
     });
   }
 

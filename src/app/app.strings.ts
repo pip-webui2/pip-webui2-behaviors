@@ -14,6 +14,10 @@ export const AppTranslations = {
         'EXAMPLES.SELECTED.DISABLED': 'Disable selection',
         'EXAMPLES.SHORTCUTS_DESCRIPTION': 'allows you to configure local and global shortcuts (hotkeys)',
         'EXAMPLES.HOTKEYS_DESCRIPTION': 'allows you to configure local and global hotkeys',
+        'EXAMPLES.HOTKEYS.LANGUAGE_CHANGE': 'Change language',
+        'EXAMPLES.HOTKEYS.STATE_CHANGE': 'Change state',
+        'EXAMPLES.HOTKEYS.CHANGE_BACKGROUND': 'Change background',
+        'EXAMPLES.HOTKEYS.CHANGE_FOREGROUND': 'Change foreground',
     },
     ru: {
         'en': 'English',
@@ -28,5 +32,9 @@ export const AppTranslations = {
         'EXAMPLES.DRAGGABLE_DESCRIPTION': 'реализация функции перетаскивания (drag & drop)',
         'EXAMPLES.SELECTED.DISABLED': 'Запретить смену элемента',
         'EXAMPLES.HOTKEYS_DESCRIPTION': 'позволяет настроить локальные и глобальные горячие клавиши',
+        'EXAMPLES.HOTKEYS.LANGUAGE_CHANGE': 'Сменить язык',
+        'EXAMPLES.HOTKEYS.STATE_CHANGE': 'Сменить состояние',
+        'EXAMPLES.HOTKEYS.CHANGE_BACKGROUND': 'Сменить цвет фона',
+        'EXAMPLES.HOTKEYS.CHANGE_FOREGROUND': 'Сменить цвет текста',
     }
 };
