@@ -11,7 +11,8 @@ export const AppTranslations = {
         'EXAMPLES.SELECTED_DESCRIPTION': 'allows to navigate over non-focuseable elements using arrow keys',
         'EXAMPLES.INFINITE_SCROLL_DESCRIPTION': 'allows to upload data in chunks while user is scrolling',
         'EXAMPLES.DRAGGABLE_DESCRIPTION': 'implements drag & drop functionality',
-        'EXAMPLES.SELECTED.DISABLED': 'Disable selection'
+        'EXAMPLES.SELECTED.DISABLED': 'Disable selection',
+        'EXAMPLES.SHORTCUTS_DESCRIPTION': 'allows you to configure local and global shortcuts (hotkeys)',
     },
     ru: {
         'en': 'English',
@@ -24,6 +25,7 @@ export const AppTranslations = {
         'EXAMPLES.SELECTED_DESCRIPTION': 'позволяет перемещаться по нефокусируемым элементам управления с помощью клавиш со стрелками',
         'EXAMPLES.INFINITE_SCROLL_DESCRIPTION': 'позволяет загружать данные частями во время прокрутки пользователя',
         'EXAMPLES.DRAGGABLE_DESCRIPTION': 'реализация функции перетаскивания (drag & drop)',
-        'EXAMPLES.SELECTED.DISABLED': 'Запретить смену элемента'
+        'EXAMPLES.SELECTED.DISABLED': 'Запретить смену элемента',
+        'EXAMPLES.SHORTCUTS_DESCRIPTION': 'позволяет настроить локальные и глобальные горячие клавиши',
     }
 };

@@ -6,3 +6,4 @@ export * from './lib/selected/index';
 export * from './lib/focused/index';
 export * from './lib/draggable/index';
 export * from './lib/infinite-scroll/index';
+export * from './lib/shortcuts/index';

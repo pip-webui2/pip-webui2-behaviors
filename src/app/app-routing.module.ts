@@ -6,6 +6,7 @@ import { FocusedExampleComponent } from './focused-example/focused-example.compo
 import { InfiniteScrollExampleComponent } from './infinite-scroll-example/infinite-scroll-example.component';
 import { InfiniteScrollPageExampleComponent } from './infinite-scroll-page-example/infinite-scroll-page-example.component';
 import { SelectedExampleComponent } from './selected-example/selected-example.component';
+import { ShortcutsExampleComponent } from './shortcuts-example/shortcuts-example.component';
 
 const appRoutes: Routes = [
     { path: 'selected', component: SelectedExampleComponent },
@@ -13,6 +14,7 @@ const appRoutes: Routes = [
     { path: 'infinite_scroll', component: InfiniteScrollExampleComponent },
     { path: 'infinite_page', component: InfiniteScrollPageExampleComponent },
     { path: 'draggable', component: DraggableExampleComponent },
+    { path: 'shortcuts', component: ShortcutsExampleComponent },
     { path: '**', redirectTo: 'selected' },
 ];
 

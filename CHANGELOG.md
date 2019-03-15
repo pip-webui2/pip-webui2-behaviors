@@ -194,3 +194,20 @@ No breaking changes in this version
 
 #### Bug Fixes
 No fixes in this version
+
+## <a name="1.1.10"></a> 1.1.10 (2019-03-14)
+
+Shortcuts here. This is the old behavior from pip-webui, it will be fixed.
+
+#### Features
+* **draggable** Draggable behavior
+* **focused** Focused behavior
+* **selected** Selected behavior
+* **infinite** Infinite Scroll behavior
+* **shortcuts** Hotkeys handler
+
+#### Breaking Changes
+No breaking changes in this version
+
+#### Bug Fixes
+No fixes in this version

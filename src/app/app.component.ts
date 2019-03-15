@@ -39,6 +39,11 @@ export class AppComponent implements OnInit {
       name: 'Draggable',
       id: 'draggable',
       route: 'draggable'
+    },
+    {
+      name: 'Shortcuts',
+      id: 'shortcuts',
+      route: 'shortcuts'
     }
   ];
 
