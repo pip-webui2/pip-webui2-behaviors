@@ -2,6 +2,7 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { MatSidenav } from '@angular/material';
 import { MediaObserver, MediaChange } from '@angular/flex-layout';
+import { PipHotkeysService } from 'pip-webui2-behaviors';
 import { PipThemesService, Theme } from 'pip-webui2-themes';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -44,6 +45,11 @@ export class AppComponent implements OnInit {
       name: 'Shortcuts',
       id: 'shortcuts',
       route: 'shortcuts'
+    },
+    {
+      name: 'Hotkeys',
+      id: 'hotkeys',
+      route: 'hotkeys'
     }
   ];
 
@@ -82,7 +88,8 @@ export class AppComponent implements OnInit {
     private location: Location,
     private service: PipThemesService,
     public media: MediaObserver,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private pipHotkeys: PipHotkeysService
   ) {
 
     this.themes = this.service.themes;
@@ -97,6 +104,15 @@ export class AppComponent implements OnInit {
     media.media$.subscribe((change: MediaChange) => {
       this.activeMediaQuery = change && change.mqAlias === 'xs' ? true : false;
       this.mode = change && change.mqAlias === 'xs' ? null : 'side';
+    });
+
+    this.pipHotkeys.add({
+      hotkey: 'alt+g',
+      action: () => { alert('Defaul global alt+g'); }
+    });
+    this.pipHotkeys.add({
+      hotkey: 'alt+.',
+      action: () => { alert('Global alt+.'); }
     });
   }
 

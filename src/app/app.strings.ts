@@ -13,6 +13,7 @@ export const AppTranslations = {
         'EXAMPLES.DRAGGABLE_DESCRIPTION': 'implements drag & drop functionality',
         'EXAMPLES.SELECTED.DISABLED': 'Disable selection',
         'EXAMPLES.SHORTCUTS_DESCRIPTION': 'allows you to configure local and global shortcuts (hotkeys)',
+        'EXAMPLES.HOTKEYS_DESCRIPTION': 'allows you to configure local and global hotkeys',
     },
     ru: {
         'en': 'English',
@@ -26,6 +27,6 @@ export const AppTranslations = {
         'EXAMPLES.INFINITE_SCROLL_DESCRIPTION': 'позволяет загружать данные частями во время прокрутки пользователя',
         'EXAMPLES.DRAGGABLE_DESCRIPTION': 'реализация функции перетаскивания (drag & drop)',
         'EXAMPLES.SELECTED.DISABLED': 'Запретить смену элемента',
-        'EXAMPLES.SHORTCUTS_DESCRIPTION': 'позволяет настроить локальные и глобальные горячие клавиши',
+        'EXAMPLES.HOTKEYS_DESCRIPTION': 'позволяет настроить локальные и глобальные горячие клавиши',
     }
 };

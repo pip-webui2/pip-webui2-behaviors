@@ -5,7 +5,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule, MatIconModule, MatMenuModule, MatSelectModule, MatSidenavModule, MatToolbarModule } from '@angular/material';
 import { TranslateModule } from '@ngx-translate/core';
-import { PipShortcutModule } from 'pip-webui2-behaviors';
+import { PipHotkeysModule, PipShortcutModule } from 'pip-webui2-behaviors';
 import { PipThemesModule } from 'pip-webui2-themes';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -16,6 +16,7 @@ import { InfiniteScrollExampleModule } from './infinite-scroll-example/infinite-
 import { InfiniteScrollPageExampleModule } from './infinite-scroll-page-example/infinite-scroll-page-example.module';
 import { SelectedExampleModule } from './selected-example/selected-example.module';
 import { ShortcutsExampleModule } from './shortcuts-example/shortcuts-example.module';
+import { HotkeysExampleModule } from './hotkeys-example/hotkeys-example.module';
 
 import { AppComponent } from './app.component';
 
@@ -39,6 +40,7 @@ import { AppComponent } from './app.component';
 
     PipThemesModule.forRoot(),
     PipShortcutModule.forRoot(),
+    PipHotkeysModule.forRoot(),
 
     AppRoutingModule,
     ExamplesListModule,
@@ -47,6 +49,7 @@ import { AppComponent } from './app.component';
     InfiniteScrollExampleModule,
     InfiniteScrollPageExampleModule,
     ShortcutsExampleModule,
+    HotkeysExampleModule,
     DraggableExampleModule,
   ],
   providers: [],
