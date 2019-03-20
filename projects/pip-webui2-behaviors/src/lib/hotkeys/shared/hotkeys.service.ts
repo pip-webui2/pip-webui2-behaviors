@@ -65,62 +65,65 @@ export class PipHotkeysService implements OnDestroy {
             : this._registeredHotkeys.includes(hotkey);
     }
 
-    public add(item: HotkeyItem) {
-        const hotkeys = [];
-        for (const h of Array.isArray(item.hotkey) ? cloneDeep(item.hotkey) : [item.hotkey]) {
-            hotkeys.push(h.replace(/\s/g, ''));
-        }
-        if (this._hasHotkey(hotkeys)) { return; }
-        const options: HotkeyOptions = item.options
-            ? Object.assign(item.options, cloneDeep(this._defaultOptions))
-            : cloneDeep(this._defaultOptions);
-        let element: Element;
-        if (item.target) {
-            element = item.target;
-        } else if (item.targetId) {
-            element = document.getElementById(item.targetId);
-        } else if (typeof options.Target === 'string') {
-            element = document.getElementById(options.Target);
-        } else {
-            element = options.Target;
-        }
-        if (!element) { return; }
-        const mt = this._hasInstance(element) ? this._getInstance(element) : this._createInstance(element);
-        this._registeredHotkeys.push(...hotkeys);
-        mt.bind(hotkeys, (event?: ExtendedKeyboardEvent) => {
-            const el = element as HTMLElement;
-            if (options.DisableInInput && el.contentEditable && el.contentEditable === 'true') {
-                return;
+    public add(items: HotkeyItem | HotkeyItem[]) {
+        if (!Array.isArray(items)) { items = [items]; }
+        for (const item of items) {
+            const hotkeys = [];
+            for (const h of Array.isArray(item.hotkey) ? cloneDeep(item.hotkey) : [item.hotkey]) {
+                hotkeys.push(h.toLowerCase().replace(/\s/g, ''));
             }
-            if (!options.Propagate) {
-                event.cancelBubble = true;
-                event.returnValue = true;
-                if (event.stopPropagation) {
-                    event.stopPropagation();
-                    event.preventDefault();
-                }
+            if (this._hasHotkey(hotkeys)) { return; }
+            const options: HotkeyOptions = item.options
+                ? Object.assign(item.options, cloneDeep(this._defaultOptions))
+                : cloneDeep(this._defaultOptions);
+            let element: Element;
+            if (item.target) {
+                element = item.target;
+            } else if (item.targetId) {
+                element = document.getElementById(item.targetId);
+            } else if (typeof options.Target === 'string') {
+                element = document.getElementById(options.Target);
+            } else {
+                element = options.Target;
             }
-            if (item.access && typeof item.access === 'function') {
-                if (!item.access(event)) {
+            if (!element) { return; }
+            const mt = this._hasInstance(element) ? this._getInstance(element) : this._createInstance(element);
+            this._registeredHotkeys.push(...hotkeys);
+            mt.bind(hotkeys, (event?: ExtendedKeyboardEvent) => {
+                const el = element as HTMLElement;
+                if (options.DisableInInput && el.contentEditable && el.contentEditable === 'true') {
                     return;
                 }
-            }
-            if (item.action) {
-                item.action(event);
-                return;
-            }
-            if (item.href) {
-                window.location.href = item.href;
-                return;
-            }
-            if (item.navigationCommand) {
-                this.router.navigate(
-                    Array.isArray(item.navigationCommand) ? item.navigationCommand : [item.navigationCommand],
-                    item.navigationExtras
-                );
-                return;
-            }
-        }, options.Type);
+                if (!options.Propagate) {
+                    event.cancelBubble = true;
+                    event.returnValue = true;
+                    if (event.stopPropagation) {
+                        event.stopPropagation();
+                        event.preventDefault();
+                    }
+                }
+                if (item.access && typeof item.access === 'function') {
+                    if (!item.access(event)) {
+                        return;
+                    }
+                }
+                if (item.action) {
+                    item.action(event);
+                    return;
+                }
+                if (item.href) {
+                    window.location.href = item.href;
+                    return;
+                }
+                if (item.navigationCommand) {
+                    this.router.navigate(
+                        Array.isArray(item.navigationCommand) ? item.navigationCommand : [item.navigationCommand],
+                        item.navigationExtras
+                    );
+                    return;
+                }
+            }, options.Type);
+        }
     }
 
     public remove(hotkey: string | string[], type: KeyboardEventType = KeyboardEventType.Keydown) {
