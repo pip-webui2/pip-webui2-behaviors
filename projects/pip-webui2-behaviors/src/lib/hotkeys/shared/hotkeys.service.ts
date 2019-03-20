@@ -129,7 +129,7 @@ export class PipHotkeysService implements OnDestroy {
     public remove(hotkey: string | string[], type: KeyboardEventType = KeyboardEventType.Keydown) {
         const hotkeys = [];
         for (const h of Array.isArray(hotkey) ? cloneDeep(hotkey) : [hotkey]) {
-            hotkeys.push(h.replace(/\s/g, ''));
+            hotkeys.push(h.toLowerCase().replace(/\s/g, ''));
         }
         for (const key of Object.keys(this._mti)) {
             if (!this._mti.hasOwnProperty(key)) { continue; }
