@@ -47,6 +47,7 @@ export class PipSelectedComponent implements OnInit, AfterViewInit {
     private _prevItem: any = null;
     private timer: any = null;
     @Input() public itemClass = 'pip-selectable';
+    @Input() public scrollToItem: boolean;
     @Input() public selectedItemClass = 'pip-selected-item';
     @Input() public disableSelect: boolean = false;
 
@@ -83,7 +84,7 @@ export class PipSelectedComponent implements OnInit, AfterViewInit {
 
     private selectItem(itemParams: any) {
         if (this.disableSelect) {
-            this.onSelect.emit(null);    
+            this.onSelect.emit(null);
             return;
         }
 
@@ -112,7 +113,7 @@ export class PipSelectedComponent implements OnInit, AfterViewInit {
             item['classList'].add('mat-list-item-focus');
             item['focus']();
             this._prevItem = item;
-            this.scrollToItem(item);
+            this._scrollToItem(item);
 
             if (itemIndex === undefined || itemIndex === -1) {
                 this.defineIndex(items);
@@ -129,7 +130,8 @@ export class PipSelectedComponent implements OnInit, AfterViewInit {
         }
     }
 
-    private scrollToItem(item: any) {
+    private _scrollToItem(item: any) {
+        if (!this.scrollToItem) { return; }
         const offset = (element) => {
             return {
                 left: element.getBoundingClientRect().left || 0,
@@ -166,10 +168,10 @@ export class PipSelectedComponent implements OnInit, AfterViewInit {
 
     private onKeyDown(event) {
         if (this.disableSelect) {
-            this.onSelect.emit(null);    
+            this.onSelect.emit(null);
             return;
         }
-        
+
         const keyCode = event.which || event.keyCode;
         // Check control keyCode
         if (keyCode === KeyCode.ENTER || keyCode === KeyCode.SPACE) {

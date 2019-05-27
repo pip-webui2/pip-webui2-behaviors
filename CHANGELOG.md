@@ -280,3 +280,20 @@ No breaking changes in this version
 
 #### Bug Fixes
 * removing hotkeys now not case-sensitive
+
+## <a name="1.1.15"></a> 1.1.15 (2019-05-27)
+
+Pip-selected now have an option to disable scroll to item
+
+#### Features
+* **draggable** Draggable behavior
+* **focused** Focused behavior
+* **selected** Selected behavior
+* **infinite** Infinite Scroll behavior
+* **hotkeys** Hotkeys for your application
+
+#### Breaking Changes
+No breaking changes in this version
+
+#### Bug Fixes
+No fixes in this version
