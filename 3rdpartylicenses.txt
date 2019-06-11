@@ -637,6 +637,12 @@ MIT
 
 @angular/material/checkbox
 
+@angular/material/form-field
+
+@angular/material/button
+
+@angular/material/icon
+
 @angular/material/divider
 
 @angular/flex-layout
@@ -665,10 +671,6 @@ THE SOFTWARE.
 
 
 @angular/material/card
-
-@angular/material/button
-
-@angular/material/icon
 
 @angular/material/menu
 
