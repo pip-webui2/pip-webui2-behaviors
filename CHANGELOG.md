@@ -297,3 +297,22 @@ No breaking changes in this version
 
 #### Bug Fixes
 No fixes in this version
+
+## <a name="1.1.16"></a> 1.1.16 (2019-06-11)
+
+Pip-selected now deprecated  
+*\*_NEW_\** Pip-selectable
+
+#### Features
+* **draggable** Draggable behavior
+* **focused** Focused behavior
+* **selectable** Selectable behavior
+* **selected** *deprecated* Selected behavior
+* **infinite** Infinite Scroll behavior
+* **hotkeys** Hotkeys for your application
+
+#### Breaking Changes
+* `pip-selected` deprecated now, you should use `pip-selectable` with new behavior
+
+#### Bug Fixes
+No fixes in this version

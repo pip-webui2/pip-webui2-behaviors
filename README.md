@@ -2,7 +2,7 @@
 
 ![](https://img.shields.io/badge/license-MIT-blue.svg)
 
-Pip.WebUI.Behaviors module contains behaviors that can be attached to existing controls or pages
+**pip-webui2-behaviors** module contains behaviors that can be attached to existing controls or pages
 
 ### Focusable
 
@@ -36,7 +36,7 @@ To make the div orange by pressing arrow buttons
 **Using**
 
 ```html
-<pip-selected (onSelect)="selectedIndex = $event.index" [index]="selectedIndex">
+<pip-selectable (selected)="selectedIndex = $event.index" [resolver]="customResolver" [index]="selectedIndex">
     <div pipSelectable>Selectable</>
     <div pipSelectable>Selectable</>
     <div pipSelectable>Selectable</>

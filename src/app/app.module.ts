@@ -14,7 +14,7 @@ import { ExamplesListModule } from './examples-list/examples-list.module';
 import { FocusedExampleModule } from './focused-example/focused-example.module';
 import { InfiniteScrollExampleModule } from './infinite-scroll-example/infinite-scroll-example.module';
 import { InfiniteScrollPageExampleModule } from './infinite-scroll-page-example/infinite-scroll-page-example.module';
-import { SelectedExampleModule } from './selected-example/selected-example.module';
+import { SelectableExampleModule } from './selectable-example/selectable-example.module';
 import { HotkeysExampleModule } from './hotkeys-example/hotkeys-example.module';
 
 import { AppComponent } from './app.component';
@@ -42,7 +42,7 @@ import { AppComponent } from './app.component';
 
     AppRoutingModule,
     ExamplesListModule,
-    SelectedExampleModule,
+    SelectableExampleModule,
     FocusedExampleModule,
     InfiniteScrollExampleModule,
     InfiniteScrollPageExampleModule,

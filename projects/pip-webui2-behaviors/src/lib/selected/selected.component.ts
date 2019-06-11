@@ -49,7 +49,7 @@ export class PipSelectedComponent implements OnInit, AfterViewInit {
     @Input() public itemClass = 'pip-selectable';
     @Input() public scrollToItem: boolean;
     @Input() public selectedItemClass = 'pip-selected-item';
-    @Input() public disableSelect: boolean = false;
+    @Input() public disableSelect = false;
 
     // tslint:disable-next-line:no-output-on-prefix
     @Output() onSelect: EventEmitter<any> = new EventEmitter<any>();
