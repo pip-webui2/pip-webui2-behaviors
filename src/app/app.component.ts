@@ -17,9 +17,9 @@ import { ExmapleListItem } from './examples-list/shared/ExampleListItem';
 export class AppComponent implements OnInit {
   public list: ExmapleListItem[] = [
     {
-      name: 'Selected',
-      id: 'selected',
-      route: 'selected'
+      name: 'Selectable',
+      id: 'selectable',
+      route: 'selectable'
     },
     {
       name: 'Focused',
