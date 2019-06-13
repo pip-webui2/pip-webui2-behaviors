@@ -1,11 +1,18 @@
-import { Component, Input, Output, OnInit, AfterViewInit, EventEmitter, Renderer, ElementRef } from '@angular/core';
-import { KeyCode } from '../shared/key-code.model';
+import {
+    Component, Input, Output, OnDestroy, AfterViewInit, EventEmitter, Renderer,
+    ElementRef, ContentChildren, QueryList, HostListener
+} from '@angular/core';
+import { DOWN_ARROW, UP_ARROW, RIGHT_ARROW, LEFT_ARROW } from '@angular/cdk/keycodes';
+import { Subscription, BehaviorSubject, merge } from 'rxjs';
+import { distinct, distinctUntilChanged, tap } from 'rxjs/operators';
+
+import { PipSelectableDirective } from './selectable.directive';
 
 export interface PipSelectableResolveEvent {
     index: number | null;
     nextIndex: number | null;
-    item: HTMLElement;
-    nextItem: HTMLElement;
+    item: ElementRef;
+    nextItem: ElementRef;
     target: HTMLElement;
 }
 
@@ -19,8 +26,9 @@ export enum PipVisibilityResult {
 
 export interface PipSelectableResolveEmitData {
     index: number | null;
-    item: HTMLElement;
+    item: ElementRef;
     target: HTMLElement;
+    value?: any;
 }
 
 export type PipSelectableResolverFunction = ($event?: PipSelectableResolveEvent) => Promise<boolean>;
@@ -30,11 +38,11 @@ export type PipSelectableResolverFunction = ($event?: PipSelectableResolveEvent)
     template: '<ng-content></ng-content>',
     styleUrls: ['./selectable.component.scss']
 })
-export class PipSelectableComponent implements OnInit, AfterViewInit {
+export class PipSelectableComponent implements OnDestroy, AfterViewInit {
 
-    private _defaultResolver: PipSelectableResolverFunction;
-    private _index = -1;
-    private _latestIndex: number;
+    // private _defaultResolver: PipSelectableResolverFunction;
+    private _index$ = new BehaviorSubject<number>(-1);
+    // private _latestIndex: number;
     private _prevItem: HTMLElement = null;
     private _resolver: PipSelectableResolverFunction;
     private _requestAnimFrame = (function () {
@@ -45,109 +53,128 @@ export class PipSelectableComponent implements OnInit, AfterViewInit {
                 window.setTimeout(callback, 1000 / 60);
             };
     })();
+    private _subs = new Subscription();
 
     @Input() public itemClass = 'pip-selectable';
     @Input() public selectedItemClass = 'pip-selected-item';
     @Input() public skipHidden = true;
     @Input() public scrollToItem = true;
     @Input() set index(index: number) {
-        if (this._index === index) { return; }
-        this._latestIndex = index;
-        this._selectItem({ index, emitEvent: false });
+        this._index$.next(index);
     }
 
     @Input() set resolver(r: PipSelectableResolverFunction) {
         if (r) {
             this._resolver = r;
-        } else {
-            this._resolver = this._defaultResolver;
         }
     }
 
     @Output() selected: EventEmitter<PipSelectableResolveEmitData> = new EventEmitter<PipSelectableResolveEmitData>();
 
+    @ContentChildren(PipSelectableDirective, { descendants: true }) elements: QueryList<PipSelectableDirective>;
+
     constructor(
-        renderer: Renderer,
+        private renderer: Renderer,
         private elRef: ElementRef
     ) {
-        this._defaultResolver = () => new Promise<boolean>((resolve, reject) => resolve(true));
-        this._resolver = this._defaultResolver;
-        renderer.setElementClass(elRef.nativeElement, 'pip-selectable', true);
-        renderer.setElementAttribute(elRef.nativeElement, 'tabindex', '1');
-        renderer.setElementStyle(elRef.nativeElement, 'outline', 'none');
-        renderer.listen(elRef.nativeElement, 'keydown', (event) => {
-            this.onKeyDown(event);
-        });
+        // this._defaultResolver = () => new Promise<boolean>((resolve, reject) => resolve(true));
+        this.renderer.setElementClass(elRef.nativeElement, 'pip-selectable', true);
+        this.renderer.setElementAttribute(elRef.nativeElement, 'tabindex', '1');
+        this.renderer.setElementStyle(elRef.nativeElement, 'outline', 'none');
     }
 
-    ngOnInit() { }
+
+    ngOnDestroy() { this._subs.unsubscribe(); }
 
     ngAfterViewInit() {
-        this._selectItem({ index: this._latestIndex, emitEvent: false, forceUpdate: true });
+        this._subs.add(merge(
+            this.elements.changes,
+            this._index$.asObservable().pipe(
+                tap(idx => console.log('[_idx_]', idx)),
+                distinctUntilChanged()
+            )
+        ).subscribe((arg) => {
+            console.group('ELEMENTS/INDEX changed');
+            console.log('arg is', arg);
+            const element = this._findElementByIndex(this._index$.value);
+            console.log('this element found', element);
+            this._updateClasses(element);
+            this._scrollToItem(element);
+            console.groupEnd();
+        }));
     }
 
-    private _getIndexByItem(items: HTMLCollection, item: HTMLElement): number {
+    private _findElementByIndex(idx: number): ElementRef {
+        const dir = this.elements && this.elements.find((d, i) => i === idx) || null;
+        return dir ? dir.elRef : null;
+    }
+
+    private _findIndexByElement(element: ElementRef): number {
         let idx = -1;
-        for (let index = 0; index < items.length; index++) {
-            if (items[index].nodeType === items[index].ELEMENT_NODE) {
-                if (item.isEqualNode(items[index])) {
-                    idx = index;
-                    break;
+        if (this.elements) {
+            this.elements.forEach((d, i) => {
+                if (d.elRef === element) {
+                    idx = i;
                 }
-            }
+            });
         }
         return idx;
     }
 
-    private _getElements(): HTMLCollection {
-        return this.elRef.nativeElement.getElementsByClassName(this.itemClass);
+    private _selectItemResolve(params: {
+        emitEvent?: boolean,
+        index?: number,
+        item?: ElementRef
+    } = { emitEvent: true }) {
+        const nextIndex = typeof params.index !== 'undefined'
+            ? params.index
+            : (params.item ? this._findIndexByElement(params.item) : this._index$.value);
+        const item = this._findElementByIndex(this._index$.value);
+        const nextItem = params.item || this._findElementByIndex(nextIndex);
+        if (this._resolver) {
+            this._resolver({
+                index: this._index$.value,
+                nextIndex,
+                item,
+                nextItem,
+                target: this.elRef.nativeElement
+            }).then(res => (res ? this._selectItem({ index: nextIndex, item: nextItem, emitEvent: params.emitEvent }) : null));
+        } else {
+            this._selectItem({ index: nextIndex, item: nextItem, emitEvent: params.emitEvent });
+        }
     }
 
-    private _selectItem(options: {
+    private _selectItem(params: {
         emitEvent?: boolean,
-        items?: HTMLCollection,
-        index?: number,
-        item?: any,
-        forceUpdate?: boolean
-    } = { emitEvent: true }) {
-        const items: HTMLCollection = options.items || this._getElements();
-        const nextIndex = typeof options.index !== 'undefined'
-            ? options.index
-            : (options.item ? this._getIndexByItem(items, options.item) : this._index);
-        const item = (this._index >= 0 && this._index < items.length && items[this._index]) as HTMLElement || null;
-        const nextItem = options.item || (nextIndex >= 0 && nextIndex < items.length && items[nextIndex]) as HTMLElement || null;
-        this._resolver({
-            index: this._index,
-            nextIndex,
-            item,
-            nextItem,
-            target: this.elRef.nativeElement
-        }).then(res => {
-            if (!res || (this._index === nextIndex && !options.forceUpdate)) { return; }
-            this._index = nextIndex;
-            if (nextItem) {
-                if (this._prevItem) {
-                    this._prevItem.classList.remove(this.selectedItemClass);
-                    this._prevItem.classList.remove('mat-list-item-focus');
-                }
-                nextItem['classList'].add(this.selectedItemClass);
-                nextItem['classList'].add('mat-list-item-focus');
-                nextItem['focus']();
-                this._prevItem = nextItem;
-                const visibility = this._isItemVisible(nextItem);
-                if (visibility !== PipVisibilityResult.Visible) {
-                    this._scrollToItem(nextItem);
-                }
+        index: number,
+        item: ElementRef
+    }) {
+        this._index$.next(params.index);
+        const dir = this.elements && this.elements.find((d, i) => i === params.index);
+        if (params.emitEvent) {
+            this.selected.emit({
+                index: params.index,
+                item: params.item,
+                target: this.elRef.nativeElement,
+                value: dir && dir.value || undefined
+            });
+        }
+    }
 
-            }
-            if (options.emitEvent) {
-                this.selected.emit({
-                    index: this._index,
-                    item: nextItem,
-                    target: this.elRef.nativeElement,
-                });
-            }
-        });
+    private _updateClasses(element: ElementRef) {
+        if (this._prevItem) {
+            console.log('has prev element', this._prevItem);
+            this.renderer.setElementClass(this._prevItem, this.selectedItemClass, false);
+            this.renderer.setElementClass(this._prevItem, 'mat-list-item-focus', false);
+        }
+        if (element) {
+            const item = element.nativeElement;
+            console.log('set all the classes for new item', item);
+            this.renderer.setElementClass(item, this.selectedItemClass, true);
+            this.renderer.setElementClass(item, 'mat-list-item-focus', true);
+            item.focus();
+            this._prevItem = item;
+        }
     }
 
     private _isItemVisible(item: HTMLElement, full: boolean = true): PipVisibilityResult {
@@ -156,9 +183,7 @@ export class PipSelectableComponent implements OnInit, AfterViewInit {
         const height = rect.height;
         let res: PipVisibilityResult;
         let el: HTMLElement = item.parentElement;
-        // Check if bottom of the element is off the page
         if (rect.bottom < 0) { return PipVisibilityResult.Hidden; }
-        // Check its within the document viewport
         if (top > document.documentElement.clientHeight) { return PipVisibilityResult.Hidden; }
         do {
             rect = el.getBoundingClientRect();
@@ -182,8 +207,6 @@ export class PipSelectableComponent implements OnInit, AfterViewInit {
 
         const scrollY = this.elRef.nativeElement.scrollTop;
         let currentTime = 0;
-
-        // min time .1, max time .8 seconds
         const time = Math.max(.1, Math.min(Math.abs(scrollY - scrollTo) / speed, .8));
 
         const easingEquations = {
@@ -200,8 +223,6 @@ export class PipSelectableComponent implements OnInit, AfterViewInit {
                 return 0.5 * (Math.pow((pos - 2), 5) + 2);
             }
         };
-
-        // add animation loop
         const tick = () => {
             currentTime += 1 / 60;
 
@@ -216,8 +237,6 @@ export class PipSelectableComponent implements OnInit, AfterViewInit {
                 this.elRef.nativeElement.scrollTo(0, scrollTo);
             }
         };
-
-        // call it once to get started
         tick();
     }
 
@@ -247,12 +266,13 @@ export class PipSelectableComponent implements OnInit, AfterViewInit {
         return hs;
     }
 
-    private _scrollToItem(item: any) {
-        if (!this.scrollToItem) { return; }
-        const offset = (element) => {
+    private _scrollToItem(element: ElementRef) {
+        if (!this.scrollToItem || !element) { return; }
+        const item = element.nativeElement;
+        const offset = (el) => {
             return {
-                left: element.getBoundingClientRect().left || 0,
-                top: element.getBoundingClientRect().top || 0
+                left: el.getBoundingClientRect().left || 0,
+                top: el.getBoundingClientRect().top || 0
             };
         };
 
@@ -266,7 +286,6 @@ export class PipSelectableComponent implements OnInit, AfterViewInit {
             containerScrollTop = this.elRef.nativeElement.scrollTop,
             containerHeights = this._getContainerVisibleHeights();
 
-        // const containerVisibility = this._isItemVisible(this.elRef.nativeElement, false);
         switch (this._isItemVisible(this.elRef.nativeElement, false)) {
             case PipVisibilityResult.Visible: {
                 if (containerTop > itemTop) {
@@ -305,33 +324,34 @@ export class PipSelectableComponent implements OnInit, AfterViewInit {
         }
     }
 
-    public onClickEvent = (element) => {
-        this._selectItem({
+    public onClickEvent(element: ElementRef) {
+        this._selectItemResolve({
             item: element,
             emitEvent: true
         });
     }
 
-    private onKeyDown(event) {
-        const keyCode = event.which || event.keyCode;
-        if (keyCode === KeyCode.LEFT_ARROW || keyCode === KeyCode.RIGHT_ARROW ||
-            keyCode === KeyCode.UP_ARROW || keyCode === KeyCode.DOWN_ARROW
-        ) {
-            event.preventDefault();
-            event.stopPropagation();
-
-            // Get next selectable control index
-            const items = this._getElements(),
-                inc = (keyCode === KeyCode.RIGHT_ARROW || keyCode === KeyCode.DOWN_ARROW) ? 1 : -1;
-
-            const index = this._index + inc >= items.length ? 0 : this._index + inc < 0 ? items.length - 1 : this._index + inc;
-
-            // Set next control as selected
-            this._selectItem({
-                index,
-                items: items,
-                emitEvent: true
-            });
+    @HostListener('keydown', ['$event']) keydown(event: KeyboardEvent) {
+        let index;
+        switch (event.keyCode) {
+            case DOWN_ARROW:
+            case RIGHT_ARROW:
+                index = this._index$.value + 1;
+                break;
+            case UP_ARROW:
+            case LEFT_ARROW:
+                index = this._index$.value - 1;
+                break;
+            default:
+                return;
         }
+        event.preventDefault();
+        event.stopPropagation();
+        if (index < 0) { index = this.elements.length - 1; }
+        if (index >= this.elements.length) { index = 0; }
+        this._selectItemResolve({
+            index,
+            emitEvent: true
+        });
     }
 }

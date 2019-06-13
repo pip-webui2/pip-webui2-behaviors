@@ -5,8 +5,9 @@ import { PipSelectableComponent } from './selectable.component';
     selector: '[pipSelectable]'
 })
 export class PipSelectableDirective {
-    private onClickEvent: Function;
     private _class = 'pip-selectable';
+    private _value: any;
+
     @Input() set pipSelectable(className: string) {
         if (className) {
             this._class = className;
@@ -14,18 +15,29 @@ export class PipSelectableDirective {
         }
     }
 
-    constructor(private elRef: ElementRef, private renderer: Renderer, @Host() selectable: PipSelectableComponent) {
+    @Input() set pipSelectableValue(value: any) {
+        this._value = value;
+    }
+
+    constructor(
+        public elRef: ElementRef,
+        private renderer: Renderer,
+        @Host() private selectable: PipSelectableComponent
+    ) {
         this.setClass();
-        this.onClickEvent = selectable.onClickEvent;
     }
 
     private setClass() {
         this.renderer.setElementClass(this.elRef.nativeElement, this._class, true);
     }
 
-    @HostListener('click') click() {
-        this.onClickEvent(this.elRef.nativeElement);
+    public get value(): any {
+        return this._value;
     }
 
-    @HostListener('keypress') keydown() { }
+    @HostListener('click') click() {
+        if (this.selectable) {
+            this.selectable.onClickEvent(this.elRef);
+        }
+    }
 }
