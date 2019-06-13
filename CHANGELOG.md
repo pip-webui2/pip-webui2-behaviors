@@ -316,3 +316,21 @@ Pip-selected now deprecated
 
 #### Bug Fixes
 No fixes in this version
+
+## <a name="1.1.17"></a> 1.1.17 (2019-06-13)
+
+`pip-selectable` fixes on elements change
+
+#### Features
+* **draggable** Draggable behavior
+* **focused** Focused behavior
+* **selectable** Selectable behavior
+* **selected** *deprecated* Selected behavior
+* **infinite** Infinite Scroll behavior
+* **hotkeys** Hotkeys for your application
+
+#### Breaking Changes
+No breaking changes in this version
+
+#### Bug Fixes
+* better item selection, but still no way to change items with index at the same time

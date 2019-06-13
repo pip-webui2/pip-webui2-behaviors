@@ -43,7 +43,7 @@ export class PipSelectableComponent implements OnDestroy, AfterViewInit {
     // private _defaultResolver: PipSelectableResolverFunction;
     private _index$ = new BehaviorSubject<number>(-1);
     // private _latestIndex: number;
-    private _prevItem: HTMLElement = null;
+    private _prevElement: ElementRef = null;
     private _resolver: PipSelectableResolverFunction;
     private _requestAnimFrame = (function () {
         return window.requestAnimationFrame ||
@@ -90,17 +90,17 @@ export class PipSelectableComponent implements OnDestroy, AfterViewInit {
         this._subs.add(merge(
             this.elements.changes,
             this._index$.asObservable().pipe(
-                tap(idx => console.log('[_idx_]', idx)),
+                // tap(idx => console.log('[_idx_]', idx)),
                 distinctUntilChanged()
             )
         ).subscribe((arg) => {
-            console.group('ELEMENTS/INDEX changed');
-            console.log('arg is', arg);
+            // console.group('ELEMENTS/INDEX changed');
+            // console.log('arg is', arg);
             const element = this._findElementByIndex(this._index$.value);
-            console.log('this element found', element);
+            // console.log('this element found', element);
             this._updateClasses(element);
             this._scrollToItem(element);
-            console.groupEnd();
+            // console.groupEnd();
         }));
     }
 
@@ -162,18 +162,19 @@ export class PipSelectableComponent implements OnDestroy, AfterViewInit {
     }
 
     private _updateClasses(element: ElementRef) {
-        if (this._prevItem) {
-            console.log('has prev element', this._prevItem);
-            this.renderer.setElementClass(this._prevItem, this.selectedItemClass, false);
-            this.renderer.setElementClass(this._prevItem, 'mat-list-item-focus', false);
+        if (this._prevElement) {
+            const prevItem = this._prevElement.nativeElement;
+            // console.log('has prev element', prevItem);
+            this.renderer.setElementClass(prevItem, this.selectedItemClass, false);
+            this.renderer.setElementClass(prevItem, 'mat-list-item-focus', false);
         }
         if (element) {
             const item = element.nativeElement;
-            console.log('set all the classes for new item', item);
+            // console.log('set all the classes for new item', item);
             this.renderer.setElementClass(item, this.selectedItemClass, true);
             this.renderer.setElementClass(item, 'mat-list-item-focus', true);
             item.focus();
-            this._prevItem = item;
+            this._prevElement = element;
         }
     }
 
