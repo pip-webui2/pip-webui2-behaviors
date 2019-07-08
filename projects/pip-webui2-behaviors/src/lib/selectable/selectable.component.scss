@@ -10,6 +10,7 @@
             &.pip-selected-item {
                 border-left: 3px solid mat-color($primary);
                 background-color: mat-color($background, 'app-bar');
+                color: mat-color($foreground, text);
                 .mat-list-item-content {
                     padding-left: 13px;
                 }

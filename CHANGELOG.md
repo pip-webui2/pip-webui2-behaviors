@@ -334,3 +334,21 @@ No breaking changes in this version
 
 #### Bug Fixes
 * better item selection, but still no way to change items with index at the same time
+
+## <a name="1.1.18"></a> 1.1.18 (2019-07-08)
+
+`pip-selectable` styles fix for dark theme
+
+#### Features
+* **draggable** Draggable behavior
+* **focused** Focused behavior
+* **selectable** Selectable behavior
+* **selected** *deprecated* Selected behavior
+* **infinite** Infinite Scroll behavior
+* **hotkeys** Hotkeys for your application
+
+#### Breaking Changes
+No breaking changes in this version
+
+#### Bug Fixes
+* fixed styles for dark theme for `pip-selectable`
