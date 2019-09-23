@@ -352,3 +352,21 @@ No breaking changes in this version
 
 #### Bug Fixes
 * fixed styles for dark theme for `pip-selectable`
+
+## <a name="1.1.19"></a> 1.1.19 (2019-09-23)
+
+Updated for current themes
+
+#### Features
+* **draggable** Draggable behavior
+* **focused** Focused behavior
+* **selectable** Selectable behavior
+* **selected** *deprecated* Selected behavior
+* **infinite** Infinite Scroll behavior
+* **hotkeys** Hotkeys for your application
+
+#### Breaking Changes
+No breaking changes in this version
+
+#### Bug Fixes
+* fixed styles for dark theme for `pip-selectable`
