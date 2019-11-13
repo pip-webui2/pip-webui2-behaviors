@@ -66,6 +66,7 @@ export class AppComponent implements OnInit {
     'mst-light-theme': 'MST Light',
     'mst-dark-theme': 'MST Dark',
     'mst-mono-theme': 'MST Mono',
+    'mst-elegant-theme': 'MST Elegant',
   };
 
   public listIndex = 0;
