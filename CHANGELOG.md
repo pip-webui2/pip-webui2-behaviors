@@ -388,3 +388,21 @@ No breaking changes in this version
 
 #### Bug Fixes
 No fixes in this version
+
+## <a name="1.1.21"></a> 1.1.21 (2019-12-10)
+
+`accent` and `primary` colors switched in `mst-elegant-theme`
+
+#### Features
+* **draggable** Draggable behavior
+* **focused** Focused behavior
+* **selectable** Selectable behavior
+* **selected** *deprecated* Selected behavior
+* **infinite** Infinite Scroll behavior
+* **hotkeys** Hotkeys for your application
+
+#### Breaking Changes
+No breaking changes in this version
+
+#### Bug Fixes
+No fixes in this version
