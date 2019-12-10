@@ -52,8 +52,7 @@ export class SelectableExampleComponent {
         this.selectedIndex$ = this.state$.asObservable().pipe(
             switchMap(state => {
                 return state === 'create' ? of(0) : this._currentIndex$.asObservable();
-            }),
-            tap(idx => console.log('[idx]', idx))
+            })
         );
         this.finishCreate();
         this.finishCreate();
@@ -75,7 +74,6 @@ export class SelectableExampleComponent {
     }
 
     public select($event: PipSelectableResolveEmitData) {
-        console.log(($event.value));
         if ($event.value as { id: number, title: string }) {
             const idx = this.pg_items.findIndex(it => it.id === $event.value.id);
             if (idx >= 0) {

@@ -1,6 +1,6 @@
 {
   "name": "pip-webui2-behaviors",
-  "version": "1.1.21",
+  "version": "1.1.22",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -33,7 +33,7 @@
     "core-js": "^2.5.4",
     "lodash": "^4.17.11",
     "mousetrap": "^1.6.3",
-    "pip-webui2-themes": "^1.1.19",
+    "pip-webui2-themes": "^1.1.20",
     "rxjs": "~6.3.3",
     "zone.js": "~0.8.26"
   },

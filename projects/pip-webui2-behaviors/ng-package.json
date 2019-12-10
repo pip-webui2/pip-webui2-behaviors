@@ -6,7 +6,7 @@
     "umdModuleIds": {
       "lodash": "^4.17.11",
       "mousetrap": "^1.6.3",
-      "pip-webui2-themes": "^1.1.19"
+      "pip-webui2-themes": "^1.1.20"
     }
   },
   "whitelistedNonPeerDependencies": [
