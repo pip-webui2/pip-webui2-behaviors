@@ -4,7 +4,7 @@
     $background: map-get($theme, background);
     $primary: map-get($theme, primary);
     :host {
-        /deep/ .pip-selectable {
+        ::ng-deep .pip-selectable {
             width: 100%;
             max-width: 100%;
             &.pip-selected-item {
@@ -28,7 +28,7 @@
     display: block;
     overflow-y: auto;
     overflow-x: hidden;
-    /deep/ .pip-selectable.pip-selected-item {
+    ::ng-deep .pip-selectable.pip-selected-item {
         box-sizing: border-box;
         -moz-box-sizing: border-box;
         -webkit-box-sizing: border-box;
