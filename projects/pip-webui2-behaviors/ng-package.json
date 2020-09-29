@@ -4,9 +4,10 @@
   "lib": {
     "entryFile": "src/public_api.ts",
     "umdModuleIds": {
-      "lodash": "^4.17.11",
-      "mousetrap": "^1.6.3",
-      "pip-webui2-themes": "^1.1.24"
+      "lodash-es/cloneDeep": "cloneDeep",
+      "lodash-es/debounce": "debounce",
+      "mousetrap": "mousetrap",
+      "pip-webui2-themes": "pipWebui2Themes"
     }
   },
   "whitelistedNonPeerDependencies": [

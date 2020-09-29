@@ -1,4 +1,4 @@
-import { Directive, ElementRef, OnInit, AfterViewInit, OnDestroy, Renderer, Input, Output, EventEmitter } from '@angular/core';
+import { Directive, ElementRef, OnInit, AfterViewInit, OnDestroy, Input, Output, EventEmitter, Renderer2 } from '@angular/core';
 import { PipDraggableService } from './shared/draggable.service';
 
 @Directive({
@@ -73,7 +73,7 @@ export class PipDragDirective implements OnInit, AfterViewInit, OnDestroy {
 
     constructor(
         private elRef: ElementRef,
-        private renderer: Renderer,
+        private renderer: Renderer2,
         private draggableService: PipDraggableService
     ) {
         this._moveListener = (event) => {
@@ -96,7 +96,7 @@ export class PipDragDirective implements OnInit, AfterViewInit, OnDestroy {
     }
 
     private initialize() {
-        this.renderer.setElementAttribute(this.elRef.nativeElement, 'pip-draggable', 'false'); // prevent native drag
+        this.renderer.setAttribute(this.elRef.nativeElement, 'pipDraggable', 'false'); // prevent native drag
         // check to see if drag handle(s) was specified
         // if querySelectorAll is available, we use this instead of find
         // as JQLite find is limited to tagnames
@@ -131,17 +131,18 @@ export class PipDragDirective implements OnInit, AfterViewInit, OnDestroy {
             });
         } else {
             // no handle(s) specified, use the element as the handle
-            this.renderer.listen(this.elRef.nativeElement, this._pressEvent, (event) => {
-                this.onpress(event);
-            });
+            // no handle(s) specified, use the element as the handle
+this.renderer.listen(this.elRef.nativeElement, this._pressEvent, (event) => {
+    this.onpress(event);
+});
             this.renderer.listen(this.elRef.nativeElement, this._touchEvent, (event) => {
-                this.onpress(event);
-            });
+    this.onpress(event);
+});
         }
         if (!this._hasTouch && this.elRef.nativeElement.nodeName.toLowerCase() === 'img') {
             this.renderer.listen(this.elRef.nativeElement, 'mousedown', () => {
-                return false;
-            }); // prevent native drag for images
+    return false;
+}); // prevent native drag for images
         }
     }
 
@@ -366,21 +367,25 @@ export class PipDragDirective implements OnInit, AfterViewInit, OnDestroy {
     }
 
     private reset() {
-        this.renderer.setElementStyle(this.elRef.nativeElement, 'position', this._elementStyle.position);
-        this.renderer.setElementStyle(this.elRef.nativeElement, 'top', this._elementStyle.top);
-        this.renderer.setElementStyle(this.elRef.nativeElement, 'left', this._elementStyle.left);
-        this.renderer.setElementStyle(this.elRef.nativeElement, 'z-index', '');
-        this.renderer.setElementStyle(this.elRef.nativeElement, 'width', this._elementStyle.width);
+        this._elementStyle.position == null ? this.renderer.removeStyle(this.elRef.nativeElement, 'position')
+        : this.renderer.setStyle(this.elRef.nativeElement, 'position', this._elementStyle.position);
+        this._elementStyle.top == null ? this.renderer.removeStyle(this.elRef.nativeElement, 'top')
+        : this.renderer.setStyle(this.elRef.nativeElement, 'top', this._elementStyle.top);
+        this._elementStyle.left == null ? this.renderer.removeStyle(this.elRef.nativeElement, 'left')
+        : this.renderer.setStyle(this.elRef.nativeElement, 'left', this._elementStyle.left);
+        this.renderer.setStyle(this.elRef.nativeElement, 'z-index', '');
+        this._elementStyle.width == null ? this.renderer.removeStyle(this.elRef.nativeElement, 'width')
+        : this.renderer.setStyle(this.elRef.nativeElement, 'width', this._elementStyle.width);
     }
 
     private moveElement(x, y) {
         const eWidth = this.elRef.nativeElement.style.width ?
             this.elRef.nativeElement.style.width : this.elRef.nativeElement.offsetWidth;
-        this.renderer.setElementStyle(this.elRef.nativeElement, 'position', 'fixed');
-        this.renderer.setElementStyle(this.elRef.nativeElement, 'top', y + 'px');
-        this.renderer.setElementStyle(this.elRef.nativeElement, 'left', x + 'px');
-        this.renderer.setElementStyle(this.elRef.nativeElement, 'z-index', '100');
-        this.renderer.setElementStyle(this.elRef.nativeElement, 'width', eWidth + 'px');
+        this.renderer.setStyle(this.elRef.nativeElement, 'position', 'fixed');
+        this.renderer.setStyle(this.elRef.nativeElement, 'top', y + 'px');
+        this.renderer.setStyle(this.elRef.nativeElement, 'left', x + 'px');
+        this.renderer.setStyle(this.elRef.nativeElement, 'z-index', '100');
+        this.renderer.setStyle(this.elRef.nativeElement, 'width', eWidth + 'px');
     }
 
     private dragToScroll() {

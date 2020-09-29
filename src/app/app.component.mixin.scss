@@ -1,0 +1,5 @@
+@import 'hotkeys-example/hotkeys-example.component.mixin.scss';
+
+@mixin pip-webui2-behaviors-app-mixin($theme) {
+    @include hotkeys-example-mixin($theme);
+}

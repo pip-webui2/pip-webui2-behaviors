@@ -1,5 +1,5 @@
-import { Component, Input, Output, OnInit, AfterViewInit, EventEmitter, Renderer, ElementRef } from '@angular/core';
-import { debounce } from 'lodash';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2 } from '@angular/core';
+import debounce from 'lodash-es/debounce';
 import { KeyCode } from '../shared/key-code.model';
 
 @Component({
@@ -23,18 +23,17 @@ export class PipSelectedComponent implements OnInit, AfterViewInit {
     }
 
     constructor(
-        private renderer: Renderer,
+        renderer: Renderer2,
         private elRef: ElementRef
     ) {
-        renderer.setElementClass(elRef.nativeElement, 'pip-selected', true);
-        renderer.setElementAttribute(elRef.nativeElement, 'tabindex', '1');
-        renderer.setElementStyle(elRef.nativeElement, 'outline', 'none');
+        renderer.addClass(elRef.nativeElement, 'pip-selected');
+        renderer.setAttribute(elRef.nativeElement, 'tabindex', '1');
+        renderer.setStyle(elRef.nativeElement, 'outline', 'none');
         renderer.listen(elRef.nativeElement, 'focusin', (event) => {
-
-        });
+});
         renderer.listen(elRef.nativeElement, 'keydown', (event) => {
-            this.onKeyDown(event);
-        });
+    this.onKeyDown(event);
+});
 
         this.add = debounce(() => {
             this.selectItem({

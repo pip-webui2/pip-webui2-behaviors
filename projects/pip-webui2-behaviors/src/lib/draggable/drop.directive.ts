@@ -1,4 +1,4 @@
-import { Directive, ElementRef, OnInit, AfterViewInit, OnDestroy, Renderer, Input, Output, EventEmitter } from '@angular/core';
+import { Directive, ElementRef, OnInit, AfterViewInit, OnDestroy, Input, Output, EventEmitter, Renderer2 } from '@angular/core';
 import { PipDraggableService } from './shared/draggable.service';
 
 @Directive({
@@ -20,7 +20,7 @@ export class PipDropDirective implements OnInit, AfterViewInit, OnDestroy {
 
     constructor(
         private elRef: ElementRef,
-        private renderer: Renderer,
+        private renderer: Renderer2,
         private draggableService: PipDraggableService
     ) {
 

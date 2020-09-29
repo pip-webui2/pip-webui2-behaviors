@@ -1,11 +1,12 @@
+import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 import {
-    Component, Input, Output, OnDestroy, AfterViewInit, EventEmitter, Renderer,
-    ElementRef, ContentChildren, QueryList, HostListener
+    AfterViewInit, Component,
+    ContentChildren, ElementRef, EventEmitter,
+    HostListener, Input, OnDestroy, Output,
+    QueryList, Renderer2
 } from '@angular/core';
-import { DOWN_ARROW, UP_ARROW, RIGHT_ARROW, LEFT_ARROW } from '@angular/cdk/keycodes';
-import { Subscription, BehaviorSubject, merge } from 'rxjs';
-import { distinct, distinctUntilChanged, tap } from 'rxjs/operators';
-
+import { BehaviorSubject, merge, Subscription } from 'rxjs';
+import { distinctUntilChanged } from 'rxjs/operators';
 import { PipSelectableDirective } from './selectable.directive';
 
 export interface PipSelectableResolveEvent {
@@ -74,13 +75,14 @@ export class PipSelectableComponent implements OnDestroy, AfterViewInit {
     @ContentChildren(PipSelectableDirective, { descendants: true }) elements: QueryList<PipSelectableDirective>;
 
     constructor(
-        private renderer: Renderer,
+        private renderer: Renderer2,
         private elRef: ElementRef
     ) {
         // this._defaultResolver = () => new Promise<boolean>((resolve, reject) => resolve(true));
-        this.renderer.setElementClass(elRef.nativeElement, 'pip-selectable', true);
-        this.renderer.setElementAttribute(elRef.nativeElement, 'tabindex', '1');
-        this.renderer.setElementStyle(elRef.nativeElement, 'outline', 'none');
+        // this._defaultResolver = () => new Promise<boolean>((resolve, reject) => resolve(true));
+        this.renderer.addClass(elRef.nativeElement, 'pip-selectable');
+        this.renderer.setAttribute(elRef.nativeElement, 'tabindex', '1');
+        this.renderer.setStyle(elRef.nativeElement, 'outline', 'none');
     }
 
 
@@ -165,14 +167,16 @@ export class PipSelectableComponent implements OnDestroy, AfterViewInit {
         if (this._prevElement) {
             const prevItem = this._prevElement.nativeElement;
             // console.log('has prev element', prevItem);
-            this.renderer.setElementClass(prevItem, this.selectedItemClass, false);
-            this.renderer.setElementClass(prevItem, 'mat-list-item-focus', false);
+            // console.log('has prev element', prevItem);
+            this.renderer.removeClass(prevItem, this.selectedItemClass);
+            this.renderer.removeClass(prevItem, 'mat-list-item-focus');
         }
         if (element) {
             const item = element.nativeElement;
             // console.log('set all the classes for new item', item);
-            this.renderer.setElementClass(item, this.selectedItemClass, true);
-            this.renderer.setElementClass(item, 'mat-list-item-focus', true);
+            // console.log('set all the classes for new item', item);
+            this.renderer.addClass(item, this.selectedItemClass);
+            this.renderer.addClass(item, 'mat-list-item-focus');
             item.focus();
             this._prevElement = element;
         }

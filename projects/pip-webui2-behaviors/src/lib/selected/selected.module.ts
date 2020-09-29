@@ -1,10 +1,13 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatButtonModule, MatIconModule } from '@angular/material';
-
-import { PipSelectedComponent } from './selected.component';
+import { NgModule } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { PipSelectableDirective } from './selectable.directive';
+import { PipSelectedComponent } from './selected.component';
 
+/**
+ * @deprecated Deprecated since 1.1.16
+ */
 @NgModule({
   declarations: [
     PipSelectedComponent,

@@ -1,4 +1,4 @@
-import { Directive, ElementRef, AfterViewInit, Renderer, Input, Output, EventEmitter } from '@angular/core';
+import { Directive, ElementRef, AfterViewInit, Input, Output, EventEmitter, Renderer2 } from '@angular/core';
 import { KeyCode } from '../shared/key-code.model';
 
 @Directive({
@@ -59,15 +59,17 @@ export class PipFocusedDirective implements AfterViewInit {
 
     constructor(
         private elRef: ElementRef,
-        private renderer: Renderer
+        private renderer: Renderer2
     ) {
-        renderer.setElementAttribute(this.elRef.nativeElement, 'tabindex', '1');
-        renderer.setElementStyle(this.elRef.nativeElement, 'outline', 'none');
+        this.renderer.setAttribute(this.elRef.nativeElement, 'tabindex', '1');
+        renderer.setStyle(this.elRef.nativeElement, 'outline', 'none');
         renderer.listen(elRef.nativeElement, 'keydown', (event) => {
             this.keydownListener(event);
         });
         renderer.listen(elRef.nativeElement, 'focus', () => {
-            if (this.controls.length > 0) { this.controls[0].focus(); }
+            if (this.controls.length > 0) {
+                this.controls[0].focus();
+            }
         });
     }
 
@@ -92,12 +94,12 @@ export class PipFocusedDirective implements AfterViewInit {
                     this.init();
                 }
                 this.elRef.nativeElement.classList.add('pip-focused-container');
-                this.renderer.setElementStyle(element, 'outline', 'none');
+                this.renderer.setStyle(element, 'outline', 'none');
                 if (this.onFocusClass) { element.classList.add(this.onFocusClass); }
                 if (!this._focusedOpacity) {
                     this.color = element.style.backgroundColor || 'rgba(0, 0, 0, 0)';
                     this.oldBackgroundColor = this.color;
-                    this.renderer.setElementStyle(element, 'background-color', this.rgba(this.color));
+                    this.renderer.setStyle(element, 'background-color', this.rgba(this.color));
                     if (this._focusedClass) { element.classList.add(this._focusedClass); }
                 } else {
                     if (this._focusedClass) { element.classList.add(this._focusedClass); }
@@ -113,7 +115,7 @@ export class PipFocusedDirective implements AfterViewInit {
                 this.elRef.nativeElement.classList.remove('pip-focused-container');
                 if (this.onFocusClass) { element.classList.remove(this.onFocusClass); }
                 if (!this._focusedOpacity) {
-                    this.renderer.setElementStyle(element, 'background-color', this.oldBackgroundColor);
+                    this.renderer.setStyle(element, 'background-color', this.oldBackgroundColor);
                     if (this._focusedClass) { element.classList.remove(this._focusedClass); }
                 } else {
                     if (this._focusedClass) { element.classList.remove(this._focusedClass); }

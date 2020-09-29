@@ -1,0 +1,5 @@
+{
+    "entry": "projects/pip-webui2-behaviors/src/lib/mixins.scss",
+    "dest": "dist/pip-webui2-behaviors/styles.scss",
+    "ignoredImports": ["^~", "node_modules"]
+}

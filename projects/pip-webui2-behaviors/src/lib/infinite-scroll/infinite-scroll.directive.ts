@@ -1,4 +1,4 @@
-import { Directive, ElementRef, OnDestroy, Renderer, Input, Output, EventEmitter } from '@angular/core';
+import { Directive, ElementRef, OnDestroy, Input, Output, EventEmitter, Renderer2 } from '@angular/core';
 
 @Directive({
     selector: '[pipInfiniteScroll]'
@@ -43,7 +43,7 @@ export class PipInfiniteScrollDirective implements OnDestroy {
 
     constructor(
         private elRef: ElementRef,
-        private renderer: Renderer
+        private renderer: Renderer2
     ) {
         this.documentElement = document;
         this.windowElement = window;

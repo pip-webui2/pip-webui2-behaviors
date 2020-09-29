@@ -1,8 +1,8 @@
-import { Injectable, OnDestroy, InjectionToken, Inject, Optional } from '@angular/core';
+import { Inject, Injectable, InjectionToken, OnDestroy, Optional } from '@angular/core';
 import { Router } from '@angular/router';
-import cloneDeep from 'lodash/cloneDeep';
+import cloneDeep from 'lodash-es/cloneDeep';
 import * as Mousetrap from 'mousetrap';
-
+import { ExtendedKeyboardEvent, MousetrapInstance } from 'mousetrap';
 import { HotkeyItem, HotkeyOptions, KeyboardEventType } from './models';
 
 export const HOTKEYS_DEFAULT_OPTIONS = new InjectionToken<HotkeyOptions>('Hotkeys default options');

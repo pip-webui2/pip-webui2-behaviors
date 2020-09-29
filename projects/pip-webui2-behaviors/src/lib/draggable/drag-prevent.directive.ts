@@ -1,4 +1,4 @@
-import { Directive, ElementRef, AfterViewInit, Renderer } from '@angular/core';
+import { Directive, ElementRef, AfterViewInit, Renderer2 } from '@angular/core';
 
 @Directive({
     selector: '[pipDragPrevent]',
@@ -6,11 +6,11 @@ import { Directive, ElementRef, AfterViewInit, Renderer } from '@angular/core';
 export class PipDragPreventDirective implements AfterViewInit {
     constructor(
         private elRef: ElementRef,
-        private renderer: Renderer
+        private renderer: Renderer2
     ) { }
 
     ngAfterViewInit() {
-        this.renderer.setElementAttribute(this.elRef.nativeElement, 'pipDraggable', 'false');
+        this.renderer.setAttribute(this.elRef.nativeElement, 'pipDraggable', 'false');
     }
 
     private toggleListeners(enable) {
@@ -19,9 +19,9 @@ export class PipDragPreventDirective implements AfterViewInit {
             return;
         }
         // add listeners.
-        this.renderer.listen(this.elRef.nativeElement, 'mousedown touchstart touchmove touchend touchcancel',
-            (event) => { this.absorbEvent_(event); }
-        );
+        // add listeners.
+        this.renderer.listen(this.elRef.nativeElement,
+            'mousedown touchstart touchmove touchend touchcancel', (event) => { this.absorbEvent_(event); });
     }
 
     private absorbEvent_(event) {

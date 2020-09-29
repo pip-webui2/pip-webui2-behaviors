@@ -1,4 +1,4 @@
-import { Directive, ElementRef, HostListener, Renderer, Host, Input } from '@angular/core';
+import { Directive, ElementRef, HostListener, Host, Input, Renderer2 } from '@angular/core';
 import { PipSelectableComponent } from './selectable.component';
 
 @Directive({
@@ -21,14 +21,14 @@ export class PipSelectableDirective {
 
     constructor(
         public elRef: ElementRef,
-        private renderer: Renderer,
+        private renderer: Renderer2,
         @Host() private selectable: PipSelectableComponent
     ) {
         this.setClass();
     }
 
     private setClass() {
-        this.renderer.setElementClass(this.elRef.nativeElement, this._class, true);
+        this.renderer.addClass(this.elRef.nativeElement, this._class);
     }
 
     public get value(): any {
