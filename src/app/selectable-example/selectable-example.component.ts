@@ -1,9 +1,8 @@
-import { Component, ElementRef } from '@angular/core';
-import sample from 'lodash/sample';
-import { PipSelectableResolverFunction, PipSelectableResolveEvent, PipSelectableResolveEmitData } from 'pip-webui2-behaviors';
+import { Component } from '@angular/core';
+import sample from 'lodash-es/sample';
+import { PipSelectableResolveEmitData, PipSelectableResolveEvent, PipSelectableResolverFunction } from 'pip-webui2-behaviors';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { switchMap, tap } from 'rxjs/operators';
-import { MatListItem } from '@angular/material';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
     selector: 'app-selectable-example',

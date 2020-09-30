@@ -1,7 +1,5 @@
 @import 'selectable/selectable.component.mixin.scss';
-@import 'selected/selected.component.mixin.scss';
 
 @mixin pip-webui2-behaviors-mixin($theme) {
-    @include pip-selected-mixin($theme);
     @include pip-selectable-mixin($theme);
 }

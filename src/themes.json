@@ -49,7 +49,7 @@
     "output": {
         "directories": [
             "./assets/themes",
-            "../dist/pip-webui2-layouts-app/assets/themes"
+            "../dist/pip-webui2-behaviors-app/assets/themes"
         ]
     }
 }

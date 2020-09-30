@@ -6,7 +6,7 @@ import {
     QueryList, Renderer2
 } from '@angular/core';
 import { BehaviorSubject, merge, Subscription } from 'rxjs';
-import { distinctUntilChanged } from 'rxjs/operators';
+import { distinctUntilChanged, filter } from 'rxjs/operators';
 import { PipSelectableDirective } from './selectable.directive';
 
 export interface PipSelectableResolveEvent {
@@ -54,6 +54,7 @@ export class PipSelectableComponent implements OnDestroy, AfterViewInit {
                 window.setTimeout(callback, 1000 / 60);
             };
     })();
+    private _scrollInProgress = false;
     private _subs = new Subscription();
 
     @Input() public itemClass = 'pip-selectable';
@@ -95,15 +96,17 @@ export class PipSelectableComponent implements OnDestroy, AfterViewInit {
                 // tap(idx => console.log('[_idx_]', idx)),
                 distinctUntilChanged()
             )
-        ).subscribe((arg) => {
-            // console.group('ELEMENTS/INDEX changed');
-            // console.log('arg is', arg);
-            const element = this._findElementByIndex(this._index$.value);
-            // console.log('this element found', element);
-            this._updateClasses(element);
-            this._scrollToItem(element);
-            // console.groupEnd();
-        }));
+        )
+            .pipe(filter(() => !this._scrollInProgress))
+            .subscribe((arg) => {
+                // console.group('ELEMENTS/INDEX changed');
+                // console.log('arg is', arg);
+                const element = this._findElementByIndex(this._index$.value);
+                // console.log('this element found', element);
+                this._updateClasses(element);
+                this._scrollToItem(element);
+                // console.groupEnd();
+            }));
     }
 
     private _findElementByIndex(idx: number): ElementRef {
@@ -203,7 +206,7 @@ export class PipSelectableComponent implements OnDestroy, AfterViewInit {
             if (top <= rect.top && (full && !res)) { return PipVisibilityResult.Hidden; }
             if ((top + height) >= rect.bottom && (full && !res)) { return PipVisibilityResult.Hidden; }
             el = el.parentElement;
-        } while (el.parentElement !== document.body);
+        } while (el.parentElement !== document.body && el.parentElement);
         if (!res) { res = PipVisibilityResult.Visible; }
         return res;
     }
@@ -240,8 +243,10 @@ export class PipSelectableComponent implements OnDestroy, AfterViewInit {
                 this.elRef.nativeElement.scrollTo(0, scrollY + ((scrollTo - scrollY) * t));
             } else {
                 this.elRef.nativeElement.scrollTo(0, scrollTo);
+                this._scrollInProgress = false;
             }
         };
+        this._scrollInProgress = true;
         tick();
     }
 
@@ -267,7 +272,7 @@ export class PipSelectableComponent implements OnDestroy, AfterViewInit {
                 hs.hiddenBottom += (bottom - rect.bottom);
                 bottom = rect.bottom;
             }
-        } while (el !== document.body);
+        } while (el !== document.body && el.parentElement);
         return hs;
     }
 

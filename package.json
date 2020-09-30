@@ -6,7 +6,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "build:lib": "ng build pip-webui2-behaviors && npm run build:lib-md",
+    "build:lib": "ng build pip-webui2-behaviors && npm run build:lib-styles && npm run build:lib-md",
     "build:lib-styles": "scss-bundle -c ./projects/pip-webui2-behaviors/scss-bundle.config.json",
     "build:lib-md": "cpx \"{LICENSE,README.md,CHANGELOG.md}\" dist/pip-webui2-behaviors",
     "test": "ng test",

@@ -109,7 +109,6 @@ export class PipHotkeysService implements OnDestroy {
                 }
                 if (item.action) {
                     item.action(event);
-                    return;
                 }
                 if (item.href) {
                     window.location.href = item.href;

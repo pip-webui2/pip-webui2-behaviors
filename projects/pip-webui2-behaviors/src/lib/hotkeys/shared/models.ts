@@ -1,4 +1,5 @@
 import { NavigationExtras } from '@angular/router';
+import { ExtendedKeyboardEvent } from 'mousetrap';
 
 export enum KeyboardEventType {
     Keydown = 'keydown',

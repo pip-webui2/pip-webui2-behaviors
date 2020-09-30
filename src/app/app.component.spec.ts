@@ -1,13 +1,17 @@
-import { TestBed, async } from '@angular/core/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { async, TestBed } from '@angular/core/testing';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
-import { MatButtonModule, MatIconModule, MatMenuModule, MatSelectModule, MatSidenavModule, MatToolbarModule } from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateModule } from '@ngx-translate/core';
-import { PipThemesModule } from 'pip-webui2-themes';
-
-import { AppComponent } from './app.component';
+import { PipThemesModule, pipWebUI2ThemesList } from 'pip-webui2-themes';
 import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
 import { DraggableExampleModule } from './draggable-example/draggable-example.module';
 import { ExamplesListModule } from './examples-list/examples-list.module';
 import { FocusedExampleModule } from './focused-example/focused-example.module';
@@ -34,7 +38,9 @@ describe('AppComponent', () => {
 
         TranslateModule.forRoot(),
 
-        PipThemesModule.forRoot(),
+        PipThemesModule.withConfig({
+          themes: pipWebUI2ThemesList
+        }),
 
         AppRoutingModule,
         ExamplesListModule,

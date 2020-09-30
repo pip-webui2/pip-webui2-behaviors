@@ -2,6 +2,13 @@
 
 Updated to Angular 10 with dependencies
 
+#### Breaking Changes
+* Deprecated **selected** was removed
+* **hotkeys** action now could be run with other properties before they do what they should
+
+#### Bugs
+* `pip-selectable` scroll doesn't work as expected, because there's no `document` element when component costructs
+
 ---
 
 ## <a name="1.1.23"></a> 1.1.23 (2019-12-20)

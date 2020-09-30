@@ -1,5 +1,7 @@
 @import 'hotkeys-example/hotkeys-example.component.mixin.scss';
+@import 'infinite-scroll-example/infinite-scroll-example.component.mixin.scss';
 
 @mixin pip-webui2-behaviors-app-mixin($theme) {
     @include hotkeys-example-mixin($theme);
+    @include location-edit-mixin($theme);
 }

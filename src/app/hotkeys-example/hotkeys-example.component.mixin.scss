@@ -3,7 +3,7 @@
     $background: map-get($theme, background);
     $foreground: map-get($theme, foreground);
 
-    :host {
+    app-hotkeys-example {
         .raised-bg {
             background-color: mat-color($background, 'disabled-button');
         }

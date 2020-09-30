@@ -1,16 +1,34 @@
-import { Directive, ElementRef, OnDestroy, Input, Output, EventEmitter, Renderer2 } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
 
 @Directive({
     selector: '[pipInfiniteScroll]'
 })
-export class PipInfiniteScrollDirective implements OnDestroy {
+export class PipInfiniteScrollDirective implements OnDestroy, AfterViewInit {
+
+    private initialized = false;
+    private runAfterInit: (() => void)[] = [];
+
     @Input() set scrollParent(parent: boolean) {
-        this.changeContainer(parent ? this.elRef.nativeElement.parentElement : this.elRef.nativeElement);
+        const change = () => {
+            this.changeContainer(parent ? this.elRef.nativeElement.parentElement : this.elRef.nativeElement);
+        };
+        if (this.initialized) {
+            change();
+        } else {
+            this.runAfterInit.push(change);
+        }
     }
     @Input() set scrollContainer(elSelector: string) {
-        const el = this.documentElement.querySelector(elSelector);
-        if (el) {
-            this.changeContainer(el);
+        const change = () => {
+            const el = this.elRef.nativeElement.closest(elSelector);
+            if (el) {
+                this.changeContainer(el);
+            }
+        };
+        if (this.initialized) {
+            change();
+        } else {
+            this.runAfterInit.push(change);
         }
     }
     @Input() set immediateCheck(check: any) {
@@ -37,15 +55,12 @@ export class PipInfiniteScrollDirective implements OnDestroy {
     private scrollEnabled = true;
     private unregisterEventListener: Function = null;
     private _useDocumentBottom = false;
-    private documentElement: HTMLElement | Document = null;
     private windowElement: HTMLElement | Window = null;
     private onContainerScrollThrottle: Function;
 
     constructor(
         private elRef: ElementRef,
-        private renderer: Renderer2
     ) {
-        this.documentElement = document;
         this.windowElement = window;
         this.onContainerScrollThrottle = this.throttle(() => {
             this.onContainerScroll();
@@ -59,6 +74,11 @@ export class PipInfiniteScrollDirective implements OnDestroy {
             this.unregisterEventListener();
             return this.unregisterEventListener = null;
         }
+    }
+
+    ngAfterViewInit() {
+        this.initialized = true;
+        this.runAfterInit.forEach(f => f());
     }
 
     private height(element) {

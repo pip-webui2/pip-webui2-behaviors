@@ -1,5 +1,6 @@
 import { Component, Injector, SkipSelf } from '@angular/core';
 import { PipHotkeysService } from 'pip-webui2-behaviors';
+import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 
 @Component({
     selector: 'app-hotkeys-example',

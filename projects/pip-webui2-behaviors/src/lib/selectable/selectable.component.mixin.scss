@@ -2,17 +2,18 @@
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
     $primary: map-get($theme, primary);
-    :host {
-        ::ng-deep .pip-selectable {
-            width: 100%;
-            max-width: 100%;
-            &.pip-selected-item {
-                border-left: 3px solid mat-color($primary);
-                background-color: mat-color($background, 'app-bar');
-                color: mat-color($foreground, text);
-                .mat-list-item-content {
-                    padding-left: 13px;
-                }
+
+    .pip-selectable {
+        width: 100%;
+        max-width: 100%;
+
+        &.pip-selected-item {
+            border-left: 3px solid mat-color($primary);
+            background-color: mat-color($background, 'app-bar');
+            color: mat-color($foreground, text);
+
+            .mat-list-item-content {
+                padding-left: 13px;
             }
         }
     }

@@ -1,10 +1,8 @@
 import { Component, DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import {
-    MatCardModule,
-    MatListModule
-} from '@angular/material';
+import { MatCardModule } from '@angular/material/card';
+import { MatListModule } from '@angular/material/list';
 
 import { PipFocusedDirective } from './focused.directive';
 
