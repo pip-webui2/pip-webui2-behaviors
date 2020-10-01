@@ -14,7 +14,7 @@
         <mat-icon>translate</mat-icon>
       </button>
       <mat-menu #menuLang="matMenu">
-        <button *ngFor="let lang of langs" mat-menu-item (click)="changeLanguage(lang)">
+        <button *ngFor="let lang of languages" mat-menu-item (click)="changeLanguage(lang)">
           {{ lang | translate }}
           <mat-icon *ngIf="lang === selectedLang" style="margin-bottom: 10px">check</mat-icon>
         </button>
