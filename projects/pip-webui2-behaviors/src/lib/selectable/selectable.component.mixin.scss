@@ -7,11 +7,19 @@
         width: 100%;
         max-width: 100%;
 
-        &.pip-selected-item {
+        &.pip-selected-item::before {
+            position: absolute;
             border-left: 3px solid mat-color($primary);
             background-color: mat-color($background, 'app-bar');
             color: mat-color($foreground, text);
+            left: 0;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            content: ' '
+        }
 
+        &.pip-selected-item {
             .mat-list-item-content {
                 padding-left: 13px;
             }

@@ -1,3 +1,13 @@
+## <a name="2.0.0-rc.2"></a> 2.0.0-rc.2 (2020-10-01)
+
+#### Bug fixes
+* `pip-selectable` styles
+
+#### Known bugs
+* `pip-selectable` scroll doesn't work as expected, because there's no `document` element when component costructs
+
+---
+
 ## <a name="2.0.0-rc.1"></a> 2.0.0-rc.1 (2020-09-29)
 
 Updated to Angular 10 with dependencies
@@ -6,7 +16,7 @@ Updated to Angular 10 with dependencies
 * Deprecated **selected** was removed
 * **hotkeys** action now could be run with other properties before they do what they should
 
-#### Bugs
+#### Known bugs
 * `pip-selectable` scroll doesn't work as expected, because there's no `document` element when component costructs
 
 ---
