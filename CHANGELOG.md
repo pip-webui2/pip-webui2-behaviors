@@ -1,6 +1,16 @@
 ## <a name="2.0.0-rc.2"></a> 2.0.0-rc.2 (2020-10-01)
 
 #### Bug fixes
+* `mousetrap` devDependencies added
+
+#### Known bugs
+* `pip-selectable` scroll doesn't work as expected, because there's no `document` element when component costructs
+
+---
+
+## <a name="2.0.0-rc.2"></a> 2.0.0-rc.2 (2020-10-01)
+
+#### Bug fixes
 * `pip-selectable` styles
 
 #### Known bugs

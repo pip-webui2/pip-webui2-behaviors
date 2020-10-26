@@ -1,6 +1,6 @@
 {
   "name": "pip-webui2-behaviors",
-  "version": "2.0.0-rc.2",
+  "version": "2.0.0-rc.3",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -10,6 +10,9 @@
     "lodash-es": "^4.17.11",
     "mousetrap": "^1.6.3",
     "pip-webui2-themes": "^1.1.24"
+  },
+  "devDependencies": {
+    "@types/mousetrap": "^1.6.4"
   },
   "peerDependencies": {
     "@angular/cdk": "^7.1.1",

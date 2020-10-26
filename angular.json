@@ -170,5 +170,8 @@
       }
     }
   },
-  "defaultProject": "pip-webui2-behaviors-app"
+  "defaultProject": "pip-webui2-behaviors-app",
+  "cli": {
+    "analytics": false
+  }
 }
