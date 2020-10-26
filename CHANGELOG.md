@@ -21,6 +21,23 @@ Updated to Angular 10 with dependencies
 
 ---
 
+## <a name="1.1.24"></a> 1.1.24 (2020-10-26)
+
+Bug fix for `mousetrap`
+
+#### Features
+* **draggable** Draggable behavior
+* **focused** Focused behavior
+* **selectable** Selectable behavior
+* **selected** *deprecated* Selected behavior
+* **infinite** Infinite Scroll behavior
+* **hotkeys** Hotkeys for your application
+
+#### Bug Fixes
+* Fix import of `ExtendedKeyboardEvent`
+
+---
+
 ## <a name="1.1.23"></a> 1.1.23 (2019-12-20)
 
 All `/deep/` in scss changed with `::ng-deep`, because it is deprecated in Angular 8
