@@ -442,3 +442,18 @@ No breaking changes in this version
 
 #### Bug Fixes
 No fixes in this version
+
+## <a name="1.1.24"></a> 1.1.24 (2020-10-26)
+
+Bug fix for `mousetrap`
+
+#### Features
+* **draggable** Draggable behavior
+* **focused** Focused behavior
+* **selectable** Selectable behavior
+* **selected** *deprecated* Selected behavior
+* **infinite** Infinite Scroll behavior
+* **hotkeys** Hotkeys for your application
+
+#### Bug Fixes
+* Fix import of `ExtendedKeyboardEvent`

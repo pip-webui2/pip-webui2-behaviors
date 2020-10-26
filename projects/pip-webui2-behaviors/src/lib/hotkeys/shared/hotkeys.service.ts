@@ -2,6 +2,7 @@ import { Injectable, OnDestroy, InjectionToken, Inject, Optional } from '@angula
 import { Router } from '@angular/router';
 import cloneDeep from 'lodash/cloneDeep';
 import * as Mousetrap from 'mousetrap';
+import { ExtendedKeyboardEvent, MousetrapInstance } from 'mousetrap';
 
 import { HotkeyItem, HotkeyOptions, KeyboardEventType } from './models';
 
